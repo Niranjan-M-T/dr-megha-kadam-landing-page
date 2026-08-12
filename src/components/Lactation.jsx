@@ -1,16 +1,15 @@
 'use client'
 
 import { useRef } from 'react'
-import Link from 'next/link'
 import { motion, useTransform } from 'framer-motion'
-import { Milk } from 'lucide-react'
+import { ShieldCheck, Syringe } from 'lucide-react'
 import useElementProgress from '../hooks/useElementProgress'
 
 const helps = [
-  'Latching & positioning support',
-  'Feeding schedules & cluster feeding',
-  'Pumping, storage & back-to-work plans',
-  'Low-supply worries & maternal nutrition',
+  'IAP & WHO recommended vaccination schedules',
+  'Birth vaccines, 6/10/14-week & booster doses',
+  'Catch-up vaccination plans for missed shots',
+  'Pain-minimised injection techniques & post-care',
 ]
 
 export default function Lactation() {
@@ -19,7 +18,7 @@ export default function Lactation() {
   const cardY = useTransform(scrollYProgress, [0, 1], [50, -50])
 
   return (
-    <section className="lactation" id="lactation" ref={ref}>
+    <section className="lactation" id="vaccination" ref={ref}>
       <div className="container lact-grid">
         <motion.div
           className="lact-copy"
@@ -28,14 +27,14 @@ export default function Lactation() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <span className="eyebrow eyebrow-light">For new mothers</span>
+          <span className="eyebrow eyebrow-light">Child Immunization</span>
           <h2>
-            The early days are tender. <em>You deserve real support.</em>
+            Protecting your child, <em>every step of the way.</em>
           </h2>
           <p>
-            As an <strong>International Board-Certified Lactation Consultant (IBCLC)</strong>,
-            Dr. Megha offers specialised, judgment-free support through the earliest weeks of
-            motherhood — because feeding your baby should feel empowering, not exhausting.
+            Vaccinations are your child&apos;s strongest shield against preventable diseases.
+            Dr. Megha offers <strong>gentle, pain-minimized immunization procedures</strong> following
+            IAP guidelines — ensuring your child stays safe, healthy and protected.
           </p>
           <ul className="check-list">
             {helps.map((h) => (
@@ -48,21 +47,21 @@ export default function Lactation() {
             className="btn btn-light"
             onClick={() => typeof window !== 'undefined' && window.dispatchEvent(new Event('open_appointment_modal'))}
             data-conversion-name="appointment_modal_open"
-            data-conversion-category="lactation_section"
-            data-conversion-location="lactation"
+            data-conversion-category="vaccination_section"
+            data-conversion-location="vaccination"
           >
-            Plan a Lactation Visit
+            Schedule a Vaccination Visit
           </button>
         </motion.div>
 
         <motion.div className="lact-visual" style={{ y: cardY }}>
           <div className="lact-card">
-            <span className="lact-icon"><Milk size={36} strokeWidth={1.4} /></span>
+            <span className="lact-icon"><ShieldCheck size={36} strokeWidth={1.4} /></span>
             <p>
-              “The first six weeks are where mothers need the most support — and receive the
-              least. That is exactly where I try to be.”
+              “Timely vaccination is the greatest gift of protection we give our children.
+              We make sure every shot is as painless and reassuring as possible.”
             </p>
-            <cite>— Dr. Megha D Kadam, IBCLC</cite>
+            <cite>— Dr. Megha D Kadam, Pediatric Specialist</cite>
           </div>
         </motion.div>
       </div>

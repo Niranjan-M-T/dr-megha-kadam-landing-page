@@ -75,7 +75,7 @@ export default function Hero() {
           <motion.ul className="hero-trust" variants={item}>
             <li><ShieldCheck size={17} /> 12+ years of experience</li>
             <li><Award size={17} /> Fellowship in Neonatology</li>
-            <li><Milk size={17} /> IBCLC-certified</li>
+            <li><ShieldCheck size={17} /> IAP &amp; WHO Vaccination Schedules</li>
           </motion.ul>
         </motion.div>
 
@@ -108,7 +108,7 @@ export default function Hero() {
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 5.2, repeat: Infinity, ease: 'easeInOut' }}
           >
-            Lactation support for new mums
+            Complete Child Vaccinations
           </motion.span>
         </motion.div>
       </div>

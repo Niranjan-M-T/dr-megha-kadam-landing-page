@@ -28,28 +28,28 @@ const services = [
     ],
   },
   {
-    slug: 'lactation-support',
-    icon: 'milk',
+    slug: 'vaccinations-immunization',
+    icon: 'shield',
     tint: 'tint-sage',
-    name: 'Lactation Support (IBCLC)',
+    name: 'Vaccinations & Immunization',
     short:
-      'IBCLC-certified guidance on latching, supply and pumping, so feeding feels calm and confident — not stressful.',
-    metaTitle: 'IBCLC Lactation Consultant in RT Nagar, Bangalore',
+      'Painless, timely vaccination schedules and immunization guidance from birth through adolescence.',
+    metaTitle: 'Child Vaccination & Immunization Specialist in RT Nagar, Bangalore',
     metaDescription:
-      'IBCLC-certified lactation consultant in RT Nagar, Bangalore. Dr. Megha D Kadam offers judgment-free breastfeeding support — latching, supply concerns, pumping and back-to-work plans for new mothers.',
-    h1: 'Lactation support that meets you where you are',
+      'Complete child vaccination and immunization clinic in RT Nagar, Bangalore. Dr. Megha D Kadam offers pain-minimized vaccinations, catch-up schedules, and routine childhood vaccines.',
+    h1: 'Timely, gentle vaccinations for your growing child',
     lead:
-      'Feeding your baby should feel empowering — not exhausting. As an International Board-Certified Lactation Consultant (IBCLC), Dr. Megha offers specialised, judgment-free breastfeeding support through the earliest weeks of motherhood.',
+      'Protecting your child from preventable diseases with a complete, pain-minimized immunization schedule tailored to your child\'s age and health history.',
     body: [
-      'The IBCLC credential is the highest international certification in lactation care, and Dr. Megha pairs it with something just as valuable: the clinical perspective of a pediatrician and neonatologist who understands both mother and baby.',
-      'Whether you are struggling with a painful latch, worried about supply, planning a return to work, or simply want reassurance that things are on track, consultations are unhurried and practical — you leave with a plan, not a lecture.',
+      'Dr. Megha D Kadam follows IAP (Indian Academy of Pediatrics) and WHO recommended vaccination protocols, ensuring your child receives safe, high-quality vaccines with gentle care.',
+      'Whether your baby needs birth vaccines, routine 6-week/10-week/14-week shots, booster doses, or catch-up immunization for missed vaccines, consultations are unhurried with clear explanations of post-vaccine care.',
     ],
     helps: [
-      'Latching and positioning support',
-      'Low-supply worries and weight-gain concerns',
-      'Painful feeding, engorgement and blocked ducts',
-      'Pumping, storage and back-to-work feeding plans',
-      'Maternal nutrition and feeding schedules',
+      'IAP & WHO recommended pediatric vaccination schedules',
+      'Birth to adolescent immunization & routine booster shots',
+      'Catch-up vaccination plans for delayed or missed doses',
+      'Pain-minimised injection techniques & post-vaccine guidance',
+      'Annual flu shots and specialised pediatric vaccines',
     ],
   },
   {
