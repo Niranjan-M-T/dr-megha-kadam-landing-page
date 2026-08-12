@@ -1889,27 +1889,80 @@ address { font-style: normal; }
 
 /* ─── LP Mobile Responsive ─── */
 @media (max-width: 768px) {
-  .lp-hero { padding: 24px 0 40px; }
+  html, body {
+    overflow-x: hidden !important;
+    width: 100vw !important;
+  }
+
+  .lp-hero {
+    padding: 24px 0 32px;
+    overflow: hidden;
+  }
+
   .lp-hero-inner {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 28px;
     text-align: center;
   }
+
   .lp-hero-copy { order: 2; }
-  .lp-visual { order: 1; }
-  .lp-hero-copy h1 { font-size: clamp(1.8rem, 7vw, 2.6rem); }
-  .lp-hero-copy .hero-sub { margin-inline: auto; }
-  .lp-trust-row { justify-content: center; }
 
-  .lp-wa-btn { padding: 14px 16px; }
-  .lp-wa-icon-ring { width: 42px; height: 42px; }
-  .lp-wa-label strong { font-size: 0.95rem; }
+  .lp-visual {
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-inline: auto;
+    width: 100%;
+  }
 
-  .lp-secondary-ctas { flex-direction: column; }
-  .lp-action-grid { grid-template-columns: 1fr; }
-  .lp-creds-grid { grid-template-columns: 1fr; }
-  .lp-map-frame { height: 260px; }
-  .lp-footer { padding-bottom: 80px; }
+  .float-chip {
+    position: relative !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    margin: 8px auto 0 !important;
+    display: inline-flex !important;
+    font-size: 0.78rem !important;
+    padding: 7px 14px !important;
+  }
+
+  .lp-hero-copy h1 { font-size: clamp(1.8rem, 7vw, 2.5rem); text-align: center; }
+  .lp-hero-copy .hero-sub { margin-inline: auto; text-align: center; }
+
+  .lp-cta-cluster {
+    align-items: center;
+    width: 100%;
+    margin: 20px 0 24px;
+  }
+
+  .btn-hero-whatsapp {
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+  }
+
+  .lp-secondary-ctas {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    gap: 10px;
+  }
+
+  .lp-trust-row { justify-content: center; text-align: center; }
+
+  .lp-actions-sec { padding: 24px 0; }
+  .lp-action-grid { grid-template-columns: 1fr; gap: 14px; }
+  .lp-creds-sec { padding: 40px 0; }
+  .lp-creds-grid { grid-template-columns: 1fr; gap: 16px; }
+  .lp-services-sec { padding: 40px 0; }
+  .lp-location-sec { padding: 40px 0; }
+
+  .lp-map-frame { height: 260px; margin-top: 20px; }
+  .lp-footer { padding-bottom: 90px; }
 
   .lp-header-call .lp-call-text { display: none; }
 }
