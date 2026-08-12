@@ -1,12 +1,20 @@
 {
-  // Cloudflare Pages project config.
+  "$schema": "node_modules/wrangler/config-schema.json",
+
+  // Cloudflare PAGES project config.
   // The site is a Next.js static export (next.config.mjs -> output: 'export'),
-  // so Pages just serves the prebuilt ./out directory. No Worker runtime needed.
+  // so Pages serves the prebuilt ./out directory. No Worker runtime involved.
   //
-  // Dashboard build settings should match:
-  //   Build command:            npm run build
-  //   Build output directory:   out
-  "name": "dr-megha-kadam",
+  // Dashboard build settings must match:
+  //   Framework preset:        None
+  //   Build command:           npm run build
+  //   Build output directory:  out
+  //   Root directory:          (blank - package.json is at the repo root)
+  //
+  // `pages_build_output_dir` is what marks this as a Pages config. Do NOT swap
+  // it for a Workers-style `assets` block unless the project is also switched
+  // back to Workers Builds; the two have to change together.
+  "name": "dr-meghas-child-care-clinic",
   "compatibility_date": "2026-08-12",
   "pages_build_output_dir": "./out"
 }

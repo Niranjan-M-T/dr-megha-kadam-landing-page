@@ -23,7 +23,7 @@ const jsonLd = {
       url: SITE_URL,
       telephone: CLINIC.phoneHref,
       address,
-      image: `${SITE_URL}/photos/megha-clinic.jpg`,
+      image: `${SITE_URL}/og.jpg`,
       hasMap: CLINIC.mapsUrl,
       medicalSpecialty: ['Pediatric', 'Neonatal'],
       areaServed: [
