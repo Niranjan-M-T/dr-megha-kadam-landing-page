@@ -1,58 +1,70 @@
-import AdLandingPage from '@/components/AdLandingPage'
-import { SITE_URL, DOCTOR, CLINIC, SPARSH_URL } from '@/data/site'
+import Landing from '@/components/Landing'
+import { SITE_URL, DOCTOR, CLINIC } from '@/data/site'
+import services from '@/data/services'
 
-export const metadata = {
-  alternates: { canonical: '/' },
+const address = {
+  '@type': 'PostalAddress',
+  streetAddress: CLINIC.streetAddress,
+  addressLocality: CLINIC.locality,
+  addressRegion: CLINIC.region,
+  postalCode: CLINIC.postalCode,
+  addressCountry: 'IN',
 }
 
-const physicianJsonLd = {
+// One graph covering the clinic (local business) and the doctor, so Google can
+// link the practice to the practitioner instead of treating them as unrelated.
+const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Physician',
-  name: DOCTOR.name,
-  url: SITE_URL,
-  image: `${SITE_URL}/icon.svg`,
-  medicalSpecialty: ['Pediatric', 'Neonatology'],
-  description:
-    'Consultant Pediatrician and Neonatologist in RT Nagar, Bengaluru with 12+ years of experience in newborn care, child vaccinations, growth monitoring and pediatric nutrition.',
-  telephone: `+${CLINIC.phoneHref.slice(1)}`,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: CLINIC.streetAddress,
-    addressLocality: CLINIC.locality,
-    addressRegion: CLINIC.region,
-    postalCode: CLINIC.postalCode,
-    addressCountry: 'IN',
-  },
-  worksFor: {
-    '@type': 'MedicalClinic',
-    name: CLINIC.name,
-    telephone: `+${CLINIC.phoneHref.slice(1)}`,
-    hasMap: CLINIC.mapsUrl,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: CLINIC.streetAddress,
-      addressLocality: CLINIC.locality,
-      addressRegion: CLINIC.region,
-      postalCode: CLINIC.postalCode,
-      addressCountry: 'IN',
+  '@graph': [
+    {
+      '@type': ['MedicalClinic', 'LocalBusiness'],
+      '@id': `${SITE_URL}/#clinic`,
+      name: CLINIC.name,
+      url: SITE_URL,
+      telephone: CLINIC.phoneHref,
+      address,
+      image: `${SITE_URL}/photos/megha-clinic.jpg`,
+      hasMap: CLINIC.mapsUrl,
+      medicalSpecialty: ['Pediatric', 'Neonatal'],
+      areaServed: [
+        { '@type': 'Place', name: 'RT Nagar, Bengaluru' },
+        { '@type': 'Place', name: 'HMT Layout, Bengaluru' },
+        { '@type': 'Place', name: 'Bengaluru' },
+      ],
+      availableService: services.map((s) => ({
+        '@type': 'MedicalProcedure',
+        name: s.name,
+        description: s.short,
+      })),
     },
-  },
-  alumniOf: [
-    { '@type': 'CollegeOrUniversity', name: 'M.S. Ramaiah Medical College' },
-    { '@type': 'CollegeOrUniversity', name: "St. Martha's Hospital" },
-    { '@type': 'CollegeOrUniversity', name: "St. John's Medical College" },
+    {
+      '@type': 'Physician',
+      '@id': `${SITE_URL}/#physician`,
+      name: DOCTOR.name,
+      jobTitle: DOCTOR.title,
+      url: SITE_URL,
+      telephone: CLINIC.phoneHref,
+      image: `${SITE_URL}/photos/megha-speaking.jpg`,
+      address,
+      worksFor: { '@id': `${SITE_URL}/#clinic` },
+      medicalSpecialty: ['Pediatric', 'Neonatal'],
+      alumniOf: [
+        { '@type': 'EducationalOrganization', name: 'M.S. Ramaiah Medical College' },
+        { '@type': 'EducationalOrganization', name: "St. Martha's Hospital" },
+        { '@type': 'EducationalOrganization', name: "St. John's Medical College" },
+      ],
+    },
   ],
-  sameAs: [SPARSH_URL],
 }
 
-export default function HomePage() {
+export default function Page() {
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(physicianJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <AdLandingPage />
+      <Landing />
     </>
   )
 }

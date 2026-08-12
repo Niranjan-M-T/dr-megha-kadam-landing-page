@@ -1,8 +1,12 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "dr-megha-kadam-landing-page",
+  // Cloudflare Pages project config.
+  // The site is a Next.js static export (next.config.mjs -> output: 'export'),
+  // so Pages just serves the prebuilt ./out directory. No Worker runtime needed.
+  //
+  // Dashboard build settings should match:
+  //   Build command:            npm run build
+  //   Build output directory:   out
+  "name": "dr-megha-kadam",
   "compatibility_date": "2026-08-12",
-  "assets": {
-    "directory": "./out"
-  }
+  "pages_build_output_dir": "./out"
 }
