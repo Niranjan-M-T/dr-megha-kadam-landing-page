@@ -1,6 +1,11 @@
 // Universal Conversion Tracking Utility Engine
 
-import { CONVERSION_EVENTS } from '@/data/trackingConfig'
+import {
+  CONVERSION_EVENTS,
+  TRACKING_CONFIG,
+  PRIMARY_CONVERSIONS,
+  adsConfigured,
+} from '@/data/trackingConfig'
 
 // Helper to store & retrieve ad attribution parameters (UTM, GCLID, FBCLID)
 export function getAdParams() {
@@ -47,11 +52,13 @@ export function trackConversion(eventName, customParams = {}) {
   if (typeof window === 'undefined') return
 
   const adParams = getAdParams()
-  const currentPath = window.location.pathname
   const payload = {
     event: eventName,
-    page_path: currentPath,
+    page_path: window.location.pathname,
+    page_location: window.location.href,
     page_title: document.title,
+    page_referrer: document.referrer || undefined,
+    is_primary_conversion: PRIMARY_CONVERSIONS.includes(eventName),
     timestamp: new Date().toISOString(),
     ...adParams,
     ...customParams,
@@ -64,6 +71,18 @@ export function trackConversion(eventName, customParams = {}) {
   // 2. Google Analytics / Google Ads (gtag)
   if (typeof window.gtag === 'function') {
     window.gtag('event', eventName, payload)
+
+    // Google Ads conversion. Only fires when the Ads id AND label are both
+    // configured; if the conversion is built inside GTM instead, leave them
+    // unset so the click is not counted twice.
+    if (adsConfigured() && PRIMARY_CONVERSIONS.includes(eventName)) {
+      window.gtag('event', 'conversion', {
+        send_to: `${TRACKING_CONFIG.googleAdsConversionId}/${TRACKING_CONFIG.googleAdsConversionLabel}`,
+        value: 0,
+        currency: 'INR',
+        transaction_id: `${eventName}-${Date.now()}`,
+      })
+    }
   }
 
   // 3. Meta Pixel (fbq)
@@ -136,13 +155,15 @@ export function initAutoButtonTracking() {
     }
 
     trackConversion(determinedEvent, {
-      cta_text: buttonText,
+      cta_text: buttonText.slice(0, 120),
       cta_target: href,
       cta_category: category,
-      cta_label: label,
+      cta_label: label.slice(0, 120),
       cta_location: location,
       element_id: target.id || undefined,
-      element_class: target.className || undefined,
+      // className is an SVGAnimatedString on SVG nodes and framer-motion class
+      // lists get long, so coerce and cap it before it reaches the dataLayer.
+      element_class: (typeof target.className === 'string' ? target.className : '').slice(0, 120) || undefined,
     })
   }, true)
 }

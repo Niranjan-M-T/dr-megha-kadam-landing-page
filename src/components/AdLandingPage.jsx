@@ -89,8 +89,9 @@ export default function AdLandingPage() {
         </div>
       </motion.header>
 
+      {/* ─── Hero Section ─── */}
       <section className="lp-hero" ref={heroRef}>
-        <div className="container lp-hero-inner">
+        <motion.div className="container lp-hero-inner" style={{ y: heroY, opacity: heroOpacity }}>
           <motion.div
             className="lp-hero-copy"
             variants={stagger}
@@ -185,7 +186,7 @@ export default function AdLandingPage() {
               Painless Child Vaccinations
             </motion.span>
           </motion.div>
-        </div>
+        </motion.div>
       </section>
 
       {/* ─── Quick Action Cards ─── */}

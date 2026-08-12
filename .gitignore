@@ -31,3 +31,7 @@ next-env.d.ts
 *.pem
 .vscode/
 .idea/
+
+# Raw camera/WhatsApp originals. Build inputs only; the graded, cropped
+# versions in public/photos are what the site ships.
+/_source-photos/

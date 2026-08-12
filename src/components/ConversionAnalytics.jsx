@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Script from 'next/script'
-import { TRACKING_CONFIG } from '@/data/trackingConfig'
+import { TRACKING_CONFIG, adsConfigured, needsGtag } from '@/data/trackingConfig'
 import { initAutoButtonTracking } from '@/lib/tracking'
 
 export default function ConversionAnalytics() {
@@ -10,6 +10,10 @@ export default function ConversionAnalytics() {
   const gtmId = TRACKING_CONFIG.gtmId
   const gaId = TRACKING_CONFIG.gaId
   const metaPixelId = TRACKING_CONFIG.metaPixelId
+  const adsId = TRACKING_CONFIG.googleAdsConversionId
+  // gtag is required for GA4 and for firing Ads conversions without GTM.
+  const loadGtag = needsGtag()
+  const gtagSrcId = gaId || adsId
 
   useEffect(() => {
     // Initialize global auto-tracking on all buttons and links
@@ -46,22 +50,25 @@ export default function ConversionAnalytics() {
         />
       )}
 
-      {/* Google Analytics 4 Script (Optional direct fallback) */}
-      {gaId && (
+      {/* gtag.js — loaded for GA4 and/or direct Google Ads conversions.
+          Previously this only loaded when gaId was set, which meant the Ads
+          conversion id could never fire because window.gtag never existed. */}
+      {loadGtag && (
         <>
           <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+            src={`https://www.googletagmanager.com/gtag/js?id=${gtagSrcId}`}
             strategy="afterInteractive"
           />
           <Script
-            id="ga4-init"
+            id="gtag-init"
             strategy="afterInteractive"
             dangerouslySetInnerHTML={{
               __html: `
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', '${gaId}');
+                ${gaId ? `gtag('config', '${gaId}');` : ''}
+                ${adsConfigured() ? `gtag('config', '${adsId}');` : ''}
               `,
             }}
           />
