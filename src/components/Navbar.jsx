@@ -53,20 +53,18 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-          <button
+          <a
             className="btn btn-primary btn-sm"
-            onClick={() => {
-              setOpen(false)
-              if (typeof window !== 'undefined') {
-                window.dispatchEvent(new Event('open_appointment_modal'))
-              }
-            }}
-            data-conversion-name="appointment_modal_open"
+            href="https://wa.me/918867720711?text=Hello%20Dr.%20Megha%2C%20I%20would%20like%20to%20book%20a%20consultation%20%2F%20vaccination%20visit%20for%20my%20child."
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => setOpen(false)}
+            data-conversion-name="whatsapp_click"
             data-conversion-category="navbar_cta"
             data-conversion-location="header"
           >
             Book Consultation
-          </button>
+          </a>
         </nav>
 
         <button

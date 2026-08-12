@@ -52,15 +52,17 @@ export default function Hero() {
           </motion.p>
 
           <motion.div className="hero-ctas" variants={item}>
-            <button
+            <a
               className="btn btn-primary"
-              onClick={() => typeof window !== 'undefined' && window.dispatchEvent(new Event('open_appointment_modal'))}
-              data-conversion-name="appointment_modal_open"
+              href="https://wa.me/918867720711?text=Hello%20Dr.%20Megha%2C%20I%20would%20like%20to%20book%20a%20consultation%20%2F%20vaccination%20visit%20for%20my%20child."
+              target="_blank"
+              rel="noreferrer"
+              data-conversion-name="whatsapp_click"
               data-conversion-category="hero_cta"
               data-conversion-location="hero_main"
             >
-              Book Consultation
-            </button>
+              Book Consultation on WhatsApp
+            </a>
             <Link
               className="btn btn-ghost"
               href="/contact/"
@@ -89,11 +91,11 @@ export default function Hero() {
           {/* Replace this placeholder with a portrait of Dr. Megha:
               <img className="arch-photo" src="/dr-megha.jpg" alt="Dr. Megha D Kadam" /> */}
           <div className="arch-card">
-            <div className="arch-inner">
-              <Stethoscope size={56} strokeWidth={1.4} />
-              <span className="arch-name">Dr. Megha D Kadam</span>
-              <span className="arch-creds">MBBS · DNB Pediatrics · Fellowship in Neonatology</span>
-            </div>
+            <img
+              className="arch-photo"
+              src="/dr-megha.png"
+              alt="Dr. Megha D Kadam - Consultant Pediatrician & Neonatologist"
+            />
           </div>
 
           <motion.span

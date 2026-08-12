@@ -1,11 +1,4 @@
-import Hero from '@/components/Hero'
-import Marquee from '@/components/Marquee'
-import AboutIntro from '@/components/AboutIntro'
-import Journey from '@/components/Journey'
-import ServicesGrid from '@/components/ServicesGrid'
-import Trust from '@/components/Trust'
-import Lactation from '@/components/Lactation'
-import ClinicStrip from '@/components/ClinicStrip'
+import AdLandingPage from '@/components/AdLandingPage'
 import { SITE_URL, DOCTOR, CLINIC, SPARSH_URL } from '@/data/site'
 
 export const metadata = {
@@ -20,7 +13,7 @@ const physicianJsonLd = {
   image: `${SITE_URL}/icon.svg`,
   medicalSpecialty: ['Pediatric', 'Neonatology'],
   description:
-    'Consultant Pediatrician and Neonatologist in RT Nagar, Bengaluru with 12+ years of experience in newborn care, child development, pediatric nutrition and IBCLC-certified lactation support.',
+    'Consultant Pediatrician and Neonatologist in RT Nagar, Bengaluru with 12+ years of experience in newborn care, child vaccinations, growth monitoring and pediatric nutrition.',
   telephone: `+${CLINIC.phoneHref.slice(1)}`,
   address: {
     '@type': 'PostalAddress',
@@ -59,14 +52,7 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(physicianJsonLd) }}
       />
-      <Hero />
-      <Marquee />
-      <AboutIntro />
-      <Journey />
-      <ServicesGrid withHead linkCards />
-      <Trust />
-      <Lactation />
-      <ClinicStrip />
+      <AdLandingPage />
     </>
   )
 }

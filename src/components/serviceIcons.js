@@ -1,8 +1,9 @@
-import { Baby, Milk, TrendingUp, Apple, Stethoscope, MessagesSquare } from 'lucide-react'
+import { Baby, ShieldCheck, Syringe, TrendingUp, Apple, Stethoscope, MessagesSquare } from 'lucide-react'
 
 const serviceIcons = {
   baby: Baby,
-  milk: Milk,
+  shield: ShieldCheck,
+  syringe: Syringe,
   trending: TrendingUp,
   apple: Apple,
   stethoscope: Stethoscope,

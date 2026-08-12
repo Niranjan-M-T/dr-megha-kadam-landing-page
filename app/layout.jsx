@@ -10,21 +10,14 @@ import AppointmentModal from '@/components/AppointmentModal'
 import { TRACKING_CONFIG } from '@/data/trackingConfig'
 import './globals.css'
 
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  weight: ['500', '600', '700'],
-  style: ['normal', 'italic'],
-  variable: '--font-fraunces',
-  display: 'swap',
-})
+const fraunces = { variable: '--font-fraunces' }
+const nunitoSans = { variable: '--font-nunito' }
 
-const nunitoSans = Nunito_Sans({
-  subsets: ['latin'],
-  weight: ['400', '600', '700', '800'],
-  variable: '--font-nunito',
-  display: 'swap',
-  adjustFontFallback: false,
-})
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+}
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),

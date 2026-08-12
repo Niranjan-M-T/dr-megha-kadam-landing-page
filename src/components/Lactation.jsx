@@ -43,15 +43,17 @@ export default function Lactation() {
               </li>
             ))}
           </ul>
-          <button
+          <a
             className="btn btn-light"
-            onClick={() => typeof window !== 'undefined' && window.dispatchEvent(new Event('open_appointment_modal'))}
-            data-conversion-name="appointment_modal_open"
+            href="https://wa.me/918867720711?text=Hello%20Dr.%20Megha%2C%20I%20would%20like%20to%20schedule%20a%20vaccination%20visit%20for%20my%20child."
+            target="_blank"
+            rel="noreferrer"
+            data-conversion-name="whatsapp_click"
             data-conversion-category="vaccination_section"
             data-conversion-location="vaccination"
           >
-            Schedule a Vaccination Visit
-          </button>
+            Schedule Vaccination on WhatsApp
+          </a>
         </motion.div>
 
         <motion.div className="lact-visual" style={{ y: cardY }}>

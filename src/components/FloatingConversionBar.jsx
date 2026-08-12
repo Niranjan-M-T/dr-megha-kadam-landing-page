@@ -1,15 +1,9 @@
 'use client'
 
 import { TRACKING_CONFIG, CONVERSION_EVENTS } from '@/data/trackingConfig'
-import { Phone, Calendar, MessageCircle } from 'lucide-react'
+import { Phone, MessageCircle, MapPin } from 'lucide-react'
 
 export default function FloatingConversionBar() {
-  const openModal = () => {
-    if (typeof window !== 'undefined') {
-      window.dispatchEvent(new Event('open_appointment_modal'))
-    }
-  }
-
   const whatsappUrl = `https://wa.me/${TRACKING_CONFIG.whatsapp.number}?text=${TRACKING_CONFIG.whatsapp.defaultMessage}`
 
   return (
@@ -26,7 +20,7 @@ export default function FloatingConversionBar() {
         data-conversion-location="sticky_widget"
       >
         <MessageCircle size={28} />
-        <span className="whatsapp-tooltip">Chat with Clinic</span>
+        <span className="whatsapp-tooltip">Chat on WhatsApp</span>
       </a>
 
       {/* Mobile Sticky Action Bar */}
@@ -42,28 +36,30 @@ export default function FloatingConversionBar() {
           <span>Call Now</span>
         </a>
 
-        <button
-          onClick={openModal}
-          className="smb-item smb-book"
-          data-conversion-name={CONVERSION_EVENTS.APPOINTMENT_MODAL_OPEN}
-          data-conversion-category="mobile_sticky_bar"
-          data-conversion-location="bottom_nav"
-        >
-          <Calendar size={18} />
-          <span>Book Visit</span>
-        </button>
-
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noreferrer"
-          className="smb-item smb-whatsapp"
+          className="smb-item smb-book"
           data-conversion-name={CONVERSION_EVENTS.WHATSAPP_CLICK}
           data-conversion-category="mobile_sticky_bar"
           data-conversion-location="bottom_nav"
         >
           <MessageCircle size={18} />
-          <span>WhatsApp</span>
+          <span>WhatsApp Visit</span>
+        </a>
+
+        <a
+          href={TRACKING_CONFIG.mapsUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="smb-item smb-directions"
+          data-conversion-name={CONVERSION_EVENTS.DIRECTIONS_CLICK}
+          data-conversion-category="mobile_sticky_bar"
+          data-conversion-location="bottom_nav"
+        >
+          <MapPin size={18} />
+          <span>Directions</span>
         </a>
       </div>
     </>
