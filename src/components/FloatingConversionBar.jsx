@@ -46,7 +46,7 @@ export default function FloatingConversionBar() {
           data-conversion-location="bottom_nav"
         >
           <MessageCircle size={18} />
-          <span>WhatsApp Visit</span>
+          <span>WhatsApp</span>
         </a>
 
         <a

@@ -1,41 +1,74 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
 import {
   Phone,
   MessageCircle,
   MapPin,
   ShieldCheck,
   Award,
-  Stethoscope,
   Clock,
   ArrowUpRight,
   GraduationCap,
   Baby,
-  Star,
-  CheckCircle2
+  CheckCircle2,
+  Sparkles,
+  Heart
 } from 'lucide-react'
-import { SITE_URL, DOCTOR, CLINIC, SPARSH_URL, PRACTO_URL } from '@/data/site'
+import { DOCTOR, CLINIC } from '@/data/site'
 import { TRACKING_CONFIG, CONVERSION_EVENTS } from '@/data/trackingConfig'
 import services from '@/data/services'
 import ServiceIcon from './ServiceIcon'
 
 const whatsappUrl = `https://wa.me/${TRACKING_CONFIG.whatsapp.number}?text=${TRACKING_CONFIG.whatsapp.defaultMessage}`
 
-const container = {
+/* ─── Animation Variants ─── */
+const stagger = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
+  show: { transition: { staggerChildren: 0.12, delayChildren: 0.15 } },
 }
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+}
+
+const fadeIn = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { duration: 0.6 } },
+}
+
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.92 },
+  show: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
+}
+
+const slideLeft = {
+  hidden: { opacity: 0, x: -40 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+}
+
+const slideRight = {
+  hidden: { opacity: 0, x: 40 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
 }
 
 export default function AdLandingPage() {
+  const heroRef = useRef(null)
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
+  const heroY = useTransform(scrollYProgress, [0, 1], ['0%', '20%'])
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.3])
+
   return (
     <div className="lp-wrapper">
-      {/* LP Header */}
-      <header className="lp-header">
+      {/* ─── Sticky Header ─── */}
+      <motion.header
+        className="lp-header"
+        initial={{ y: -60, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+      >
         <div className="container lp-header-inner">
           <div className="nav-brand">
             <span className="brand-mark" aria-hidden="true">M</span>
@@ -51,45 +84,45 @@ export default function AdLandingPage() {
             data-conversion-category="ad_landing_header"
             data-conversion-location="lp_header"
           >
-            <Phone size={15} /> <span className="lp-call-text">Call Clinic</span>
+            <Phone size={15} /> <span className="lp-call-text">Call Now</span>
           </a>
         </div>
-      </header>
+      </motion.header>
 
-      {/* Hero Conversion Section */}
-      <section className="lp-hero">
-        <div className="container lp-hero-inner">
+      {/* ─── Hero Section ─── */}
+      <section className="lp-hero" ref={heroRef}>
+        <motion.div className="container lp-hero-inner" style={{ y: heroY, opacity: heroOpacity }}>
           <motion.div
             className="lp-hero-copy"
-            variants={container}
+            variants={stagger}
             initial="hidden"
             animate="show"
           >
-            <motion.span className="eyebrow" variants={item}>
-              Pediatrician &amp; Neonatologist · RT Nagar, Bengaluru
+            <motion.span className="eyebrow" variants={fadeUp}>
+              <Sparkles size={14} /> Pediatrician &amp; Neonatologist · RT Nagar, Bengaluru
             </motion.span>
 
-            <motion.h1 variants={item}>
+            <motion.h1 variants={fadeUp}>
               Gentle, expert care for your <em>little one</em>
             </motion.h1>
 
-            <motion.p className="hero-sub" variants={item}>
+            <motion.p className="hero-sub" variants={fadeUp}>
               I&apos;m Dr. Megha D Kadam. For over 12+ years I&apos;ve walked alongside families —
               with pediatric care, newborn care &amp; child vaccinations delivered with genuine warmth and medical precision.
             </motion.p>
 
-            {/* Main Conversion CTA Cluster */}
-            <motion.div className="lp-cta-cluster" variants={item}>
+            {/* Main CTA */}
+            <motion.div className="lp-cta-cluster" variants={fadeUp}>
               <a
                 href={whatsappUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="btn btn-whatsapp lp-btn-main"
+                className="btn btn-hero-whatsapp"
                 data-conversion-name={CONVERSION_EVENTS.WHATSAPP_CLICK}
                 data-conversion-category="ad_landing_hero"
                 data-conversion-location="lp_hero_main"
               >
-                <MessageCircle size={22} /> Book Consultation on WhatsApp
+                <MessageCircle size={20} /> Book Consultation on WhatsApp
               </a>
 
               <div className="lp-secondary-ctas">
@@ -98,9 +131,8 @@ export default function AdLandingPage() {
                   className="btn btn-primary"
                   data-conversion-name={CONVERSION_EVENTS.PHONE_CLICK}
                   data-conversion-category="ad_landing_hero"
-                  data-conversion-location="lp_hero_phone"
                 >
-                  <Phone size={18} /> Call {CLINIC.phoneDisplay}
+                  <Phone size={18} /> Call Clinic
                 </a>
 
                 <a
@@ -110,27 +142,26 @@ export default function AdLandingPage() {
                   className="btn btn-ghost"
                   data-conversion-name={CONVERSION_EVENTS.DIRECTIONS_CLICK}
                   data-conversion-category="ad_landing_hero"
-                  data-conversion-location="lp_hero_maps"
                 >
                   <MapPin size={18} /> Get Directions
                 </a>
               </div>
             </motion.div>
 
-            {/* Quick Trust Badges */}
-            <motion.ul className="hero-trust lp-trust-row" variants={item}>
+            {/* Trust Badges */}
+            <motion.ul className="hero-trust lp-trust-row" variants={fadeUp}>
               <li><ShieldCheck size={17} /> 12+ years experience</li>
               <li><Award size={17} /> Fellowship in Neonatology</li>
               <li><CheckCircle2 size={17} /> IAP Vaccination Protocols</li>
             </motion.ul>
           </motion.div>
 
-          {/* Visual Doctor Portrait */}
+          {/* Doctor Portrait */}
           <motion.div
             className="hero-visual lp-visual"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0, scale: 0.9, y: 40 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="arch-card">
               <img
@@ -140,124 +171,168 @@ export default function AdLandingPage() {
               />
             </div>
 
-            <span className="float-chip fc-1">
+            <motion.span
+              className="float-chip fc-1"
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+            >
               Newborn &amp; NICU expertise
-            </span>
-            <span className="float-chip fc-2">
+            </motion.span>
+            <motion.span
+              className="float-chip fc-2"
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 5.2, repeat: Infinity, ease: 'easeInOut' }}
+            >
               Painless Child Vaccinations
-            </span>
+            </motion.span>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* ─── Quick Action Cards ─── */}
+      <section className="section lp-actions-sec">
+        <div className="container">
+          <motion.div
+            className="lp-action-grid"
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            {[
+              {
+                href: whatsappUrl,
+                target: '_blank',
+                cls: 'lp-card-wa',
+                iconCls: 'wa-bg',
+                icon: <MessageCircle size={24} />,
+                title: 'WhatsApp Instant',
+                sub: 'Chat directly with clinic',
+                event: CONVERSION_EVENTS.WHATSAPP_CLICK,
+              },
+              {
+                href: `tel:${CLINIC.phoneHref}`,
+                cls: 'lp-card-call',
+                iconCls: 'call-bg',
+                icon: <Phone size={24} />,
+                title: 'Call Clinic Direct',
+                sub: CLINIC.phoneDisplay,
+                event: CONVERSION_EVENTS.PHONE_CLICK,
+              },
+              {
+                href: CLINIC.mapsUrl,
+                target: '_blank',
+                cls: 'lp-card-maps',
+                iconCls: 'maps-bg',
+                icon: <MapPin size={24} />,
+                title: 'Google Business Profile',
+                sub: 'RT Nagar · Directions',
+                event: CONVERSION_EVENTS.DIRECTIONS_CLICK,
+              },
+            ].map((card) => (
+              <motion.a
+                key={card.cls}
+                href={card.href}
+                target={card.target}
+                rel={card.target ? 'noreferrer' : undefined}
+                className={`lp-action-card ${card.cls}`}
+                data-conversion-name={card.event}
+                data-conversion-category="quick_action_grid"
+                variants={fadeUp}
+                whileHover={{ y: -6, boxShadow: '0 20px 48px rgba(56,51,74,0.14)' }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <span className={`lp-act-icon ${card.iconCls}`}>{card.icon}</span>
+                <div>
+                  <strong>{card.title}</strong>
+                  <span>{card.sub}</span>
+                </div>
+                <ArrowUpRight size={18} className="lp-arrow" />
+              </motion.a>
+            ))}
           </motion.div>
         </div>
       </section>
 
-      {/* 1-Tap Mobile Action Bar Cards */}
-      <section className="section lp-actions-sec">
-        <div className="container">
-          <div className="lp-action-grid">
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="lp-action-card lp-card-wa"
-              data-conversion-name={CONVERSION_EVENTS.WHATSAPP_CLICK}
-              data-conversion-category="quick_action_grid"
-              data-conversion-location="lp_action_grid"
-            >
-              <span className="lp-act-icon wa-bg"><MessageCircle size={24} /></span>
-              <div>
-                <strong>WhatsApp Instant</strong>
-                <span>Chat directly with clinic</span>
-              </div>
-              <ArrowUpRight size={18} className="lp-arrow" />
-            </a>
-
-            <a
-              href={`tel:${CLINIC.phoneHref}`}
-              className="lp-action-card lp-card-call"
-              data-conversion-name={CONVERSION_EVENTS.PHONE_CLICK}
-              data-conversion-category="quick_action_grid"
-              data-conversion-location="lp_action_grid"
-            >
-              <span className="lp-act-icon call-bg"><Phone size={24} /></span>
-              <div>
-                <strong>Call Clinic Direct</strong>
-                <span>{CLINIC.phoneDisplay}</span>
-              </div>
-              <ArrowUpRight size={18} className="lp-arrow" />
-            </a>
-
-            <a
-              href={CLINIC.mapsUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="lp-action-card lp-card-maps"
-              data-conversion-name={CONVERSION_EVENTS.DIRECTIONS_CLICK}
-              data-conversion-category="quick_action_grid"
-              data-conversion-location="lp_action_grid"
-            >
-              <span className="lp-act-icon maps-bg"><MapPin size={24} /></span>
-              <div>
-                <strong>Google Business Profile</strong>
-                <span>RT Nagar Location &amp; Directions</span>
-              </div>
-              <ArrowUpRight size={18} className="lp-arrow" />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Doctor Experience & Credentials */}
+      {/* ─── Doctor Credentials ─── */}
       <section className="section lp-creds-sec">
         <div className="container">
-          <div className="section-head text-center">
-            <span className="eyebrow">About Dr. Megha</span>
-            <h2>A doctor who treats your family <em>like her own</em></h2>
-            <p>
+          <motion.div
+            className="section-head text-center"
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <motion.span className="eyebrow" variants={fadeUp}>
+              <Heart size={14} /> About Dr. Megha
+            </motion.span>
+            <motion.h2 variants={fadeUp}>
+              A doctor who treats your family <em>like her own</em>
+            </motion.h2>
+            <motion.p variants={fadeUp}>
               Dr. Megha D Kadam is a Consultant Pediatrician &amp; Neonatologist with 12+ years of experience caring for newborns and children.
-              Her clinical background spans leading institutions including Indira Gandhi Institute of Child Health, Apollo Hospitals, Aster CMI Hospital, and SPARSH Hospital.
-            </p>
-          </div>
+              Her clinical journey spans Indira Gandhi Institute of Child Health, Apollo Hospitals, Aster CMI Hospital, and SPARSH Hospital.
+            </motion.p>
+          </motion.div>
 
-          <div className="lp-creds-grid">
-            <div className="lp-cred-badge">
-              <GraduationCap size={28} />
-              <div>
-                <strong>MBBS</strong>
-                <span>M.S. Ramaiah Medical College</span>
-              </div>
-            </div>
-
-            <div className="lp-cred-badge">
-              <Baby size={28} />
-              <div>
-                <strong>DNB Pediatrics</strong>
-                <span>St. Martha&apos;s Hospital</span>
-              </div>
-            </div>
-
-            <div className="lp-cred-badge">
-              <Award size={28} />
-              <div>
-                <strong>Fellowship in Neonatology</strong>
-                <span>St. John&apos;s Medical College</span>
-              </div>
-            </div>
-          </div>
+          <motion.div
+            className="lp-creds-grid"
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            {[
+              { icon: <GraduationCap size={28} />, title: 'MBBS', sub: 'M.S. Ramaiah Medical College' },
+              { icon: <Baby size={28} />, title: 'DNB Pediatrics', sub: "St. Martha's Hospital" },
+              { icon: <Award size={28} />, title: 'Fellowship in Neonatology', sub: "St. John's Medical College" },
+            ].map((cred) => (
+              <motion.div className="lp-cred-badge" key={cred.title} variants={fadeUp}>
+                {cred.icon}
+                <div>
+                  <strong>{cred.title}</strong>
+                  <span>{cred.sub}</span>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
-      {/* Pediatric & Vaccination Services Grid */}
+      {/* ─── Services Grid ─── */}
       <section className="section lp-services-sec">
         <div className="container">
-          <div className="section-head text-center">
-            <span className="eyebrow">Services Offered</span>
-            <h2>Comprehensive Pediatric &amp; <em>Vaccination Care</em></h2>
-            <p>Specialised pediatric and neonatal care for every age and stage.</p>
-          </div>
+          <motion.div
+            className="section-head text-center"
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <motion.span className="eyebrow" variants={fadeUp}>Services Offered</motion.span>
+            <motion.h2 variants={fadeUp}>
+              Comprehensive Pediatric &amp; <em>Vaccination Care</em>
+            </motion.h2>
+            <motion.p variants={fadeUp}>
+              Specialised pediatric and neonatal care for every age and stage.
+            </motion.p>
+          </motion.div>
 
-          <div className="services-grid">
-            {services.map((s) => (
-              <div className="service-card" key={s.slug}>
+          <motion.div
+            className="services-grid"
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+          >
+            {services.map((s, i) => (
+              <motion.div
+                className="service-card"
+                key={s.slug}
+                variants={fadeUp}
+                whileHover={{ y: -6, boxShadow: '0 20px 48px rgba(56,51,74,0.12)' }}
+              >
                 <a
                   href={whatsappUrl}
                   target="_blank"
@@ -276,21 +351,35 @@ export default function AdLandingPage() {
                     Consult on WhatsApp <ArrowUpRight size={15} />
                   </span>
                 </a>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Google Maps Location & Clinic Info Section */}
+      {/* ─── Clinic Location & Map ─── */}
       <section className="section lp-location-sec" id="location">
         <div className="container">
-          <div className="section-head text-center">
-            <span className="eyebrow">Visit the Clinic</span>
-            <h2>Convenient Location in <em>RT Nagar, Bengaluru</em></h2>
-          </div>
+          <motion.div
+            className="section-head text-center"
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <motion.span className="eyebrow" variants={fadeUp}>Visit the Clinic</motion.span>
+            <motion.h2 variants={fadeUp}>
+              Convenient Location in <em>RT Nagar, Bengaluru</em>
+            </motion.h2>
+          </motion.div>
 
-          <div className="clinic-card">
+          <motion.div
+            className="clinic-card"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={scaleIn}
+          >
             <div className="clinic-info">
               <h3>{CLINIC.name}</h3>
               <ul className="clinic-meta">
@@ -315,14 +404,21 @@ export default function AdLandingPage() {
 
             <div className="clinic-actions">
               <a
-                className="btn btn-whatsapp"
+                className="lp-wa-btn"
                 href={whatsappUrl}
                 target="_blank"
                 rel="noreferrer"
                 data-conversion-name={CONVERSION_EVENTS.WHATSAPP_CLICK}
                 data-conversion-category="lp_clinic_section"
               >
-                <MessageCircle size={18} /> Chat on WhatsApp
+                <span className="lp-wa-icon-ring">
+                  <MessageCircle size={20} />
+                </span>
+                <span className="lp-wa-label">
+                  <strong>Chat on WhatsApp</strong>
+                  <small>Get instant reply</small>
+                </span>
+                <ArrowUpRight size={18} className="lp-wa-arrow" />
               </a>
               <a
                 className="btn btn-primary"
@@ -340,13 +436,18 @@ export default function AdLandingPage() {
                 data-conversion-name={CONVERSION_EVENTS.DIRECTIONS_CLICK}
                 data-conversion-category="lp_clinic_section"
               >
-                <MapPin size={18} /> Google Maps Profile &amp; Directions
+                <MapPin size={18} /> Google Maps &amp; Directions
               </a>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Embedded Google Maps Frame */}
-          <div className="clinic-map lp-map-frame">
+          <motion.div
+            className="clinic-map lp-map-frame"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={scaleIn}
+          >
             <iframe
               src={CLINIC.mapsEmbed}
               title={`Google Map location of ${CLINIC.name}`}
@@ -354,11 +455,11 @@ export default function AdLandingPage() {
               allowFullScreen
               referrerPolicy="no-referrer-when-downgrade"
             />
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Footer */}
+      {/* ─── Footer ─── */}
       <footer className="footer lp-footer">
         <div className="container text-center">
           <p>© {new Date().getFullYear()} Dr. Megha D Kadam. All rights reserved.</p>

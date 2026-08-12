@@ -1655,6 +1655,27 @@ address { font-style: normal; }
   transform: translateY(-2px);
 }
 
+.btn-hero-whatsapp {
+  background: var(--rose-deep);
+  color: #ffffff;
+  box-shadow: 0 10px 28px rgba(194, 114, 109, 0.35);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px 26px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+.btn-hero-whatsapp:hover {
+  background: var(--rose);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(194, 114, 109, 0.45);
+  color: #ffffff;
+}
+
 /* Conversion Debugger Toast */
 .conversion-debug-toast {
   position: fixed;
@@ -1726,6 +1747,7 @@ address { font-style: normal; }
 
 .lp-hero {
   padding: 40px 0 60px;
+  overflow: hidden;
 }
 
 .lp-hero-inner {
@@ -1742,13 +1764,76 @@ address { font-style: normal; }
   margin: 28px 0 32px;
 }
 
-.lp-btn-main {
-  font-size: 1.08rem;
-  padding: 16px 28px;
-  justify-content: center;
+/* ─── Redesigned WhatsApp CTA Button ─── */
+.lp-wa-btn {
+  display: flex;
+  align-items: center;
+  gap: 16px;
   width: 100%;
+  padding: 16px 22px;
+  background: linear-gradient(135deg, #25d366 0%, #20bd5a 100%);
+  border: none;
+  border-radius: 18px;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 32px rgba(37, 211, 102, 0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.lp-wa-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 50%);
+  pointer-events: none;
+}
+.lp-wa-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 42px rgba(37, 211, 102, 0.4), inset 0 1px 0 rgba(255,255,255,0.25);
+}
+.lp-wa-btn:active {
+  transform: translateY(0);
 }
 
+.lp-wa-icon-ring {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.2);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.lp-wa-label {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+.lp-wa-label strong {
+  font-family: var(--font-head);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.lp-wa-label small {
+  font-size: 0.78rem;
+  opacity: 0.85;
+  font-weight: 600;
+}
+
+.lp-wa-arrow {
+  margin-left: auto;
+  opacity: 0.7;
+  transition: transform 0.2s ease;
+}
+.lp-wa-btn:hover .lp-wa-arrow {
+  transform: translate(3px, -3px);
+  opacity: 1;
+}
+
+/* ─── Secondary CTAs ─── */
 .lp-secondary-ctas {
   display: flex;
   gap: 12px;
@@ -1766,6 +1851,7 @@ address { font-style: normal; }
   font-weight: 700;
 }
 
+/* ─── Quick Action Cards ─── */
 .lp-action-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1779,13 +1865,9 @@ address { font-style: normal; }
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: 20px;
-  padding: 20px;
+  padding: 22px;
   box-shadow: var(--shadow-card);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.lp-action-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-soft);
+  cursor: pointer;
 }
 
 .lp-act-icon {
@@ -1814,9 +1896,16 @@ address { font-style: normal; }
 .lp-arrow {
   margin-left: auto;
   color: var(--body);
-  opacity: 0.6;
+  opacity: 0.5;
+  transition: transform 0.2s ease;
+}
+.lp-action-card:hover .lp-arrow {
+  transform: translate(3px, -3px);
+  opacity: 1;
+  color: var(--ink);
 }
 
+/* ─── Credentials ─── */
 .lp-creds-sec {
   background: var(--white);
 }
@@ -1837,6 +1926,11 @@ address { font-style: normal; }
   border-radius: 20px;
   padding: 24px;
   color: var(--rose-deep);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.lp-cred-badge:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
 }
 .lp-cred-badge strong {
   display: block;
@@ -1849,6 +1943,7 @@ address { font-style: normal; }
   color: var(--body);
 }
 
+/* ─── Map ─── */
 .lp-map-frame {
   margin-top: 24px;
   border-radius: 24px;
@@ -1866,12 +1961,34 @@ address { font-style: normal; }
   padding: 40px 0 90px;
 }
 
-@media (max-width: 900px) {
-  .lp-hero-inner { grid-template-columns: 1fr; }
-  .lp-action-grid { grid-template-columns: 1fr; }
-  .lp-creds-grid { grid-template-columns: 1fr; }
-  .lp-secondary-ctas { flex-direction: column; }
+.lp-actions-sec {
+  padding-top: 0;
 }
 
+/* ─── LP Mobile Responsive ─── */
+@media (max-width: 768px) {
+  .lp-hero { padding: 24px 0 40px; }
+  .lp-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    text-align: center;
+  }
+  .lp-hero-copy { order: 2; }
+  .lp-visual { order: 1; }
+  .lp-hero-copy h1 { font-size: clamp(1.8rem, 7vw, 2.6rem); }
+  .lp-hero-copy .hero-sub { margin-inline: auto; }
+  .lp-trust-row { justify-content: center; }
 
+  .lp-wa-btn { padding: 14px 16px; }
+  .lp-wa-icon-ring { width: 42px; height: 42px; }
+  .lp-wa-label strong { font-size: 0.95rem; }
+
+  .lp-secondary-ctas { flex-direction: column; }
+  .lp-action-grid { grid-template-columns: 1fr; }
+  .lp-creds-grid { grid-template-columns: 1fr; }
+  .lp-map-frame { height: 260px; }
+  .lp-footer { padding-bottom: 80px; }
+
+  .lp-header-call .lp-call-text { display: none; }
+}
 

@@ -53,7 +53,7 @@ export default function Hero() {
 
           <motion.div className="hero-ctas" variants={item}>
             <a
-              className="btn btn-primary"
+              className="btn btn-hero-whatsapp"
               href="https://wa.me/918867720711?text=Hello%20Dr.%20Megha%2C%20I%20would%20like%20to%20book%20a%20consultation%20%2F%20vaccination%20visit%20for%20my%20child."
               target="_blank"
               rel="noreferrer"
@@ -61,7 +61,7 @@ export default function Hero() {
               data-conversion-category="hero_cta"
               data-conversion-location="hero_main"
             >
-              Book Consultation on WhatsApp
+              <MessageCircle size={18} /> Book Consultation on WhatsApp
             </a>
             <Link
               className="btn btn-ghost"

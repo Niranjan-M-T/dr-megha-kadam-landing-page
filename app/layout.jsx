@@ -1,17 +1,10 @@
-import { Fraunces, Nunito_Sans } from 'next/font/google'
 import { SITE_URL, DOCTOR, CLINIC } from '@/data/site'
 import MotionProvider from '@/components/MotionProvider'
-import ScrollProgress from '@/components/ScrollProgress'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
 import ConversionAnalytics from '@/components/ConversionAnalytics'
 import FloatingConversionBar from '@/components/FloatingConversionBar'
 import AppointmentModal from '@/components/AppointmentModal'
 import { TRACKING_CONFIG } from '@/data/trackingConfig'
 import './globals.css'
-
-const fraunces = { variable: '--font-fraunces' }
-const nunitoSans = { variable: '--font-nunito' }
 
 export const viewport = {
   width: 'device-width',
@@ -48,7 +41,7 @@ export default function RootLayout({ children }) {
   const gtmId = TRACKING_CONFIG.gtmId
 
   return (
-    <html lang="en" className={`${fraunces.variable} ${nunitoSans.variable}`}>
+    <html lang="en">
       <body>
         {/* Google Tag Manager (noscript) */}
         {gtmId && (
@@ -63,10 +56,7 @@ export default function RootLayout({ children }) {
         )}
         <ConversionAnalytics />
         <MotionProvider>
-          <ScrollProgress />
-          <Navbar />
           <main>{children}</main>
-          <Footer />
           <FloatingConversionBar />
           <AppointmentModal />
         </MotionProvider>
@@ -74,4 +64,3 @@ export default function RootLayout({ children }) {
     </html>
   )
 }
-
