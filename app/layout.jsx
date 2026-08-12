@@ -49,7 +49,10 @@ export const metadata = {
     siteName: CLINIC.name,
     title: `${DOCTOR.name} | Pediatrician & Neonatologist, RT Nagar`,
     description: `Newborn and NICU care, vaccinations and everyday child health at ${CLINIC.name}, RT Nagar, Bengaluru.`,
-    images: [{ url: '/photos/megha-clinic.jpg', width: 680, height: 850, alt: DOCTOR.name }],
+    // Purpose-built 1200x630 card. Deliberately the studio portrait, not a
+    // clinic photo: the share thumbnail travels further than the page itself
+    // (WhatsApp especially), so it must not carry a patient's face.
+    images: [{ url: '/og.jpg', width: 1200, height: 630, alt: `${DOCTOR.name}, ${DOCTOR.title}` }],
   },
   robots: { index: true, follow: true },
 }

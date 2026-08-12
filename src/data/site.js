@@ -1,8 +1,13 @@
 // Single source of truth for contact / SEO details.
 
-// TODO: replace with the real production domain before launch —
-// used for canonical URLs, sitemap.xml and structured data.
-export const SITE_URL = 'https://www.drmeghakadam.com'
+// Live origin. Drives the canonical tag, sitemap.xml, robots.txt, the Open
+// Graph image URLs and the JSON-LD @ids, so it must match the domain the site
+// is actually served from. A canonical pointing at a domain that does not
+// resolve can keep the page out of Google's index entirely.
+//
+// If a custom domain is added later, change this and redeploy: it is baked in
+// at build time by the static export.
+export const SITE_URL = 'https://dr-meghas-child-care-clinic.pages.dev'
 
 export const DOCTOR = {
   name: 'Dr. Megha D Kadam',
