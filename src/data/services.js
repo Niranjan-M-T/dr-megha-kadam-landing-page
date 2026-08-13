@@ -18,7 +18,7 @@ const services = [
     lead:
       "The first few days can be the most delicate. Dr. Megha Kadam has twelve years of neonatology behind her, including a Fellowship in Neonatology from St. John's Medical College.",
     body: [
-      'She has handled resuscitation in the delivery room and critical care for premature and unwell newborns at the Indira Gandhi Institute of Child Health, Apollo and Aster CMI.',
+      'She has handled resuscitation in the delivery room and critical care for premature and unwell newborns as a Neonatologist at Apollo Hospitals Bannerghatta Road, Aster CMI Hebbal and SPARSH Hennur.',
       'She will also tell you what is happening and what to expect next, in language that still makes sense at three in the morning.',
     ],
     helps: [
