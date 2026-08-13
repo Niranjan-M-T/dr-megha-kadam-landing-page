@@ -20,6 +20,44 @@ import { DOCTOR, CLINIC } from '@/data/site'
 import { TRACKING_CONFIG, CONVERSION_EVENTS } from '@/data/trackingConfig'
 import services from '@/data/services'
 import ServiceIcon from './ServiceIcon'
+import Carousel from './Carousel'
+
+/* Gallery slides. Add an entry here once its graded WebP variants exist in
+   public/photos; the carousel sizes itself from w/h so nothing shifts. */
+const GALLERY = [
+  {
+    stem: 'megha-echo',
+    widths: [640, 1080],
+    w: 1600,
+    h: 1200,
+    alt: 'Dr. Megha Kadam performing a bedside scan on a newborn in a NICU incubator',
+    caption: 'Bedside scanning in the neonatal unit',
+  },
+  {
+    stem: 'megha-newborn',
+    widths: [640, 1080],
+    w: 960,
+    h: 720,
+    alt: 'A newborn baby swaddled in a green cloth shortly after delivery',
+    caption: 'The first few minutes',
+  },
+  {
+    stem: 'megha-teaching',
+    widths: [480, 720],
+    w: 720,
+    h: 750,
+    alt: 'Dr. Megha Kadam briefing clinical staff beside an examination trolley',
+    caption: 'Teaching neonatal resuscitation to clinical staff',
+  },
+  {
+    stem: 'megha-clinic',
+    widths: [480, 680],
+    w: 680,
+    h: 850,
+    alt: 'Dr. Megha Kadam with a young patient during a consultation at her RT Nagar clinic',
+    caption: 'Consultations at the RT Nagar clinic',
+  },
+]
 
 const waUrl = `https://wa.me/${TRACKING_CONFIG.whatsapp.number}?text=${TRACKING_CONFIG.whatsapp.defaultMessage}`
 const telUrl = `tel:${CLINIC.phoneHref}`
@@ -412,7 +450,7 @@ export default function Landing() {
             <div className="about-copy">
               <motion.p className="eyebrow" variants={fadeUp}>About Dr. Megha</motion.p>
               <motion.h2 variants={fadeUp}>
-                Twelve years, mostly with <em>very small patients</em>
+                Twelve years, from tiny babies to <em>growing children</em>
               </motion.h2>
               <motion.p variants={fadeUp}>
                 She did her MBBS at M.S. Ramaiah Medical College, her DNB in Pediatrics at St.
@@ -438,6 +476,19 @@ export default function Landing() {
                 ))}
               </motion.ul>
             </div>
+          </Reveal>
+        </section>
+
+        {/* ---------- photo carousel ---------- */}
+        <section className="sec gallery">
+          <Reveal className="wrap" amount={0.15}>
+            <motion.p className="eyebrow" variants={fadeUp}>Inside the clinic</motion.p>
+            <motion.h2 variants={fadeUp}>
+              A look at <em>her work</em>
+            </motion.h2>
+            <motion.div variants={fadeUp}>
+              <Carousel slides={GALLERY} ariaLabel="Photographs of Dr. Megha at work" />
+            </motion.div>
           </Reveal>
         </section>
 
