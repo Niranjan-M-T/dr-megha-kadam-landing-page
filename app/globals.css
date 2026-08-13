@@ -398,18 +398,19 @@ p { text-wrap: pretty; }
 }
 .hero-cta .btn { width: 100%; }
 
-.hero-trust {
+.hero-title-line {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 9px;
-  margin-top: 22px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--ink-soft);
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  font-size: 0.94rem;
+  font-weight: 800;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  text-wrap: balance;
 }
-.hero-trust li { display: flex; align-items: center; gap: 7px; }
-.hero-trust svg { color: var(--gold); flex: none; }
+.hero-title-line svg { color: var(--rose-deep); flex: none; }
 
 .scroll-hint {
   display: none;
@@ -834,7 +835,7 @@ p { text-wrap: pretty; }
   .hero-photo-wrap { order: 2; width: 100%; max-width: 380px; margin: 0; }
   .hero-copy .lede { max-width: 46ch; font-size: 1.09rem; }
   .hero-cta { margin-top: 30px; justify-content: start; }
-  .hero-trust { flex-direction: row; flex-wrap: wrap; justify-content: flex-start; gap: 18px; }
+  .hero-title-line { justify-content: flex-start; font-size: 1rem; }
   /* the desktop portrait is wide enough that the chip clears her head */
   .chip-a { top: 18%; left: -14%; }
   .chip-b { bottom: 20%; right: -12%; }

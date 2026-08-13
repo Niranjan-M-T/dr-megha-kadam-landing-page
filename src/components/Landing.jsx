@@ -241,10 +241,12 @@ export default function Landing() {
                 </a>
               </div>
 
-              <ul className="hero-trust rise rise-5">
-                <li><Award size={15} /> Fellowship in Neonatology, St. John&apos;s</li>
-                <li><ShieldCheck size={15} /> IAP vaccination schedules</li>
-              </ul>
+              {/* Her title, from the single source in data/site.js so it stays in
+                  step with the header, the OG card and the JSON-LD. */}
+              <p className="hero-title-line rise rise-5">
+                <Stethoscope size={16} strokeWidth={2} />
+                {DOCTOR.title}
+              </p>
             </div>
           </div>
 
