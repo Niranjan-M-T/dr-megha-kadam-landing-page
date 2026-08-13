@@ -92,8 +92,10 @@ export default function PrivacyPage() {
         <ul className="legal-list">
           {usesGtm && (
             <li>
-              <strong>Google Tag Manager</strong> loads the measurement tools listed below. It does
-              not itself collect information about you.
+              <strong>Google Tag Manager</strong> loads the measurement tools used on the site. It
+              does not itself collect information about you, but it is a container: the clinic can
+              add or remove tools inside it without changing this website, so it may load
+              measurement tools beyond those named here.
             </li>
           )}
           {usesGa && (
@@ -157,9 +159,19 @@ export default function PrivacyPage() {
 
         <h2>How long information is kept</h2>
         <p>
-          Advertising and analytics data is retained by Google under their standard retention
-          periods, generally no longer than 14 months for the detailed records. Session storage
-          disappears when you close the tab. Hosting logs are short-lived.
+          Session storage disappears as soon as you close the tab. Hosting and security logs are
+          short-lived.
+        </p>
+        {(usesGa || usesAds || usesMeta) && (
+          <p>
+            Anything collected by the measurement tools above is held by those providers under the
+            retention period configured for each account, not by this website. Google and Meta each
+            publish their own retention settings and privacy terms.
+          </p>
+        )}
+        <p>
+          This website has no database of its own. There is nowhere on it for your information to be
+          stored.
         </p>
 
         <h2>Your rights</h2>
