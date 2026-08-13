@@ -883,3 +883,154 @@ p { text-wrap: pretty; }
 /* The no-JS safety net for framer-motion's serialised opacity:0 lives in a
    <noscript> style block in app/layout.jsx, so it applies only when scripting
    is off and cannot affect hydration. */
+
+/* ==========================================================================
+   Legal pages (/privacy)
+   A plain reading layout. No sticky header and no scroll animation: this page
+   exists to be read and to satisfy the Google Ads policy review, so it stays
+   deliberately cheap and static.
+   ========================================================================== */
+.legal { background: var(--bg); }
+
+.legal-head { border-bottom: 1px solid var(--line-soft); background: var(--white); }
+.legal-head-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 12px;
+}
+
+.legal-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  padding-inline: 4px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.legal-back:hover { color: var(--rose-deep); }
+
+.legal-body {
+  max-width: 720px;
+  padding-block: 40px 72px;
+}
+
+.legal-body h1 { margin-bottom: 8px; }
+
+.legal-meta {
+  margin-bottom: 26px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--ink-faint);
+}
+
+.legal-body .lede { margin-bottom: 8px; }
+
+.legal-body h2 {
+  margin-top: 40px;
+  margin-bottom: 10px;
+  font-size: clamp(1.25rem, 5vw, 1.5rem);
+}
+
+.legal-body p {
+  margin-bottom: 14px;
+  color: var(--ink-soft);
+  line-height: 1.68;
+}
+
+.legal-body strong { color: var(--ink); font-weight: 800; }
+
+.legal-body a:not(.btn):not(.brand):not(.legal-back) {
+  color: var(--rose-deep);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+}
+
+.legal-body code {
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--bg-warm);
+  border: 1px solid var(--line);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.86em;
+  color: var(--ink);
+}
+
+.legal-list {
+  margin-bottom: 16px;
+  display: grid;
+  gap: 12px;
+}
+.legal-list li {
+  position: relative;
+  padding-left: 20px;
+  color: var(--ink-soft);
+  line-height: 1.62;
+}
+.legal-list li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 11px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--rose);
+}
+
+.legal-contact {
+  display: grid;
+  gap: 3px;
+  margin-bottom: 24px;
+  padding: 20px 22px;
+  border-radius: var(--r-md);
+  background: var(--white);
+  border: 1px solid var(--line);
+  box-shadow: var(--sh-sm);
+  color: var(--ink-soft);
+}
+.legal-contact strong { margin-bottom: 5px; color: var(--ink); }
+.legal-tel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-top: 6px;
+  font-weight: 800;
+  color: var(--rose-deep) !important;
+  text-decoration: none !important;
+}
+
+.legal-disclaimer {
+  padding: 16px 18px;
+  border-radius: var(--r-sm);
+  background: var(--rose-wash);
+  border: 1px solid #f2ddd9;
+  font-size: 0.92rem;
+  color: var(--ink) !important;
+}
+
+.legal-cta { margin-top: 26px; width: 100%; }
+
+/* footer link through to the policy */
+.foot-links {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+.foot-links a { color: var(--rose-deep); text-decoration: underline; text-underline-offset: 3px; }
+.foot-links span { color: var(--ink-faint); }
+
+@media (min-width: 640px) {
+  .legal-body { padding-block: 52px 88px; }
+  .legal-cta { width: auto; }
+}
