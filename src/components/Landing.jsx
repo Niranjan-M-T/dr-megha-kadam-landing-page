@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { motion, useScroll, useTransform, useInView, useSpring } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
 import {
@@ -525,6 +526,11 @@ export default function Landing() {
           <p className="foot-legal">
             © {new Date().getFullYear()} {DOCTOR.name}. This site is general information, not medical
             advice. If your child needs urgent help, go to the nearest hospital.
+          </p>
+          <p className="foot-links">
+            <Link href="/privacy/">Privacy Policy</Link>
+            <span aria-hidden="true">·</span>
+            <a href={CLINIC.mapsUrl} target="_blank" rel="noreferrer">Find us on Google</a>
           </p>
         </div>
       </footer>
