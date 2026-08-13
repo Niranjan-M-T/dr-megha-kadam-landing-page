@@ -26,6 +26,15 @@ import Carousel from './Carousel'
    public/photos; the carousel sizes itself from w/h so nothing shifts. */
 const GALLERY = [
   {
+    // was the band's static photo before the carousel took that slot
+    stem: 'megha-nicu',
+    widths: [480, 720],
+    w: 720,
+    h: 900,
+    alt: 'Dr. Megha Kadam holding a newborn beside a NICU heat warmer',
+    caption: 'With a newborn in the neonatal unit',
+  },
+  {
     stem: 'megha-echo',
     widths: [640, 1080],
     w: 1600,
@@ -394,15 +403,8 @@ export default function Landing() {
         {/* ---------- neonatology band ---------- */}
         <section className="band">
           <Reveal className="wrap band-in" amount={0.25}>
-            <motion.div className="band-photo" variants={fadeUp}>
-              <Photo
-                stem="megha-nicu"
-                widths={[480, 720]}
-                w={720}
-                h={900}
-                sizes="(max-width: 720px) 88vw, 420px"
-                alt="Dr. Megha Kadam holding a newborn beside a NICU heat warmer"
-              />
+            <motion.div className="band-media" variants={fadeUp}>
+              <Carousel slides={GALLERY} ariaLabel="Photographs of Dr. Megha at work" />
             </motion.div>
             <div className="band-copy">
               <motion.p className="eyebrow" variants={fadeUp}>Neonatology</motion.p>
@@ -476,19 +478,6 @@ export default function Landing() {
                 ))}
               </motion.ul>
             </div>
-          </Reveal>
-        </section>
-
-        {/* ---------- photo carousel ---------- */}
-        <section className="sec gallery">
-          <Reveal className="wrap" amount={0.15}>
-            <motion.p className="eyebrow" variants={fadeUp}>Inside the clinic</motion.p>
-            <motion.h2 variants={fadeUp}>
-              A look at <em>her work</em>
-            </motion.h2>
-            <motion.div variants={fadeUp}>
-              <Carousel slides={GALLERY} ariaLabel="Photographs of Dr. Megha at work" />
-            </motion.div>
           </Reveal>
         </section>
 

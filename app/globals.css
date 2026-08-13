@@ -554,15 +554,19 @@ p { text-wrap: pretty; }
   border-block: 1px solid var(--line-soft);
 }
 
-.band-photo {
-  width: min(88%, 340px);
+/* The carousel occupies the slot the static photo used to. It brings its own
+   frame, radius and shadow, so this wrapper only handles width and spacing. */
+.band-media {
+  width: min(92%, 380px);
   margin: 0 auto 26px;
-  border-radius: var(--r-lg);
-  overflow: hidden;
-  box-shadow: var(--sh-lg);
-  border: 1px solid rgba(255, 255, 255, .7);
 }
-.band-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.band-media .carousel { margin-top: 0; }
+/* Square in this slot at every width. The section is a narrow column beside a
+   tall block of text, so the wider 4:3 frame used elsewhere would sit short and
+   leave the column looking unbalanced. A square also treats the portrait and
+   landscape sources in the set about equally badly, which is the fairest crop
+   available when they have to share one frame. */
+.band-media .carousel-frame { aspect-ratio: 1 / 1; }
 
 .band-copy p { color: var(--ink-soft); margin-top: 13px; }
 .band-copy .btn { margin-top: 22px; width: 100%; }
@@ -850,7 +854,7 @@ p { text-wrap: pretty; }
     align-items: center;
     gap: 68px;
   }
-  .band-photo, .about-photo { width: 100%; max-width: 400px; margin: 0; }
+  .band-media, .about-photo { width: 100%; max-width: 400px; margin: 0; }
   .about-photo { max-width: 340px; }
   /* photo right, copy left on the about block for rhythm against the band */
   .about-photo { order: 2; }
