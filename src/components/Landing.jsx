@@ -322,7 +322,7 @@ export default function Landing() {
           <Reveal className="wrap" amount={0.15}>
             <motion.p className="eyebrow" variants={fadeUp}>What she treats</motion.p>
             <motion.h2 variants={fadeUp}>
-              Newborns through the <em>school years</em>
+              Newborns, children and <em>adolescents</em>
             </motion.h2>
 
             <div className="svc-grid">
@@ -370,8 +370,8 @@ export default function Landing() {
               </motion.h2>
               <motion.p variants={fadeUp}>
                 Dr. Megha holds a Fellowship in Neonatology from St. John&apos;s Medical College and has
-                worked in the NICUs of Indira Gandhi Institute of Child Health, Apollo, Aster CMI and
-                SPARSH. She also teaches neonatal resuscitation to other doctors.
+                worked as a Neonatologist at Apollo Hospitals Bannerghatta Road, Aster CMI Hebbal and
+                SPARSH Hennur. She also teaches neonatal resuscitation to other doctors.
               </motion.p>
               <motion.p variants={fadeUp}>
                 If your baby was premature, spent time in NICU, or is not feeding or gaining weight the
