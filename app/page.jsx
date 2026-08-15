@@ -1,5 +1,5 @@
 import Landing from '@/components/Landing'
-import { SITE_URL, DOCTOR, CLINIC } from '@/data/site'
+import { SITE_URL, DOCTOR, CLINIC, CLINIC_HOURS } from '@/data/site'
 import services from '@/data/services'
 
 const address = {
@@ -25,6 +25,16 @@ const jsonLd = {
       address,
       image: `${SITE_URL}/og.jpg`,
       hasMap: CLINIC.mapsUrl,
+      // One entry per sitting, not per day: the morning and evening blocks are
+      // separate specifications, otherwise the lunch gap reads as open.
+      openingHoursSpecification: CLINIC_HOURS.flatMap((h) =>
+        h.slots.map(([opens, closes]) => ({
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: h.days,
+          opens,
+          closes,
+        }))
+      ),
       medicalSpecialty: ['Pediatric', 'Neonatal'],
       areaServed: [
         { '@type': 'Place', name: 'RT Nagar, Bengaluru' },

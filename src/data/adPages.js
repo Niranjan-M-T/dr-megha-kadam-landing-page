@@ -181,29 +181,31 @@ const adPages = [
     sitelink: {
       text: 'Clinic Location & Hours',
       desc1: 'HMT Layout, RT Nagar 560032',
-      desc2: 'By appointment. Call to confirm.',
+      desc2: 'Mon-Sat 9-12 & 5-8, Sun 10:30-1',
     },
     metaTitle: 'Clinic Location & Hours in RT Nagar, Bengaluru 560032',
-    metaDescription: `${CLINIC.name}, CBI Main Road, HMT Layout, RT Nagar, Bengaluru 560032. By appointment. Call ${CLINIC.phoneDisplay} to confirm timings.`,
+    metaDescription: `${CLINIC.name}, HMT Layout, RT Nagar, Bengaluru 560032. Open Monday to Saturday 9am-12pm and 5-8pm, Sunday 10:30am-1pm. Call ${CLINIC.phoneDisplay}.`,
     eyebrow: 'Visit the clinic',
     h1: 'Where to find the clinic',
     lead:
       "Dr. Megha's Baby & Child Care is on the first floor of the Lenskart building on CBI Main Road, HMT Layout, RT Nagar.",
     body: [
-      "Visits are by appointment. Call or send a WhatsApp message before you come and the clinic will confirm the day's timings, so you are not sitting in a waiting room with an unwell child for longer than you need to.",
+      'The clinic is open seven days a week. Monday to Saturday it runs two sittings, 9 am to 12 pm and 5 to 8 pm. Sunday is one sitting, 10:30 am to 1 pm.',
+      'A quick call or WhatsApp before you leave home is still worth it. It confirms the doctor is in and saves you sitting in a waiting room with an unwell child for longer than you need to.',
       'It is a short drive from Ganganagar, Sultanpalya, Kaval Byrasandra, Dinnur and Hebbal.',
       'For a first visit, bring any previous prescriptions along with the immunisation card and growth chart if you have them.',
     ],
     listTitle: 'Good to know',
     helps: [
-      'By appointment: call to confirm the day’s timings',
+      'Monday to Saturday: 9 am–12 pm and 5–8 pm',
+      'Sunday: 10:30 am–1 pm',
       'First floor, Lenskart building, CBI Main Road',
       'HMT Layout, RT Nagar, Bengaluru 560032',
       'Bring previous prescriptions and the immunisation card',
       'The directions button opens straight into Google Maps',
     ],
-    ctaLabel: 'Ask for an appointment',
-    waMessage: "Hi Dr. Megha, I'd like to know the clinic timings and book a slot.",
+    ctaLabel: 'Message the clinic',
+    waMessage: "Hi Dr. Megha, I'd like to book a slot at the clinic.",
     showMap: true,
   },
 
@@ -213,7 +215,7 @@ const adPages = [
     sitelink: {
       text: 'Fevers, Coughs & Rashes',
       desc1: 'Examined properly, not rushed',
-      desc2: "Call to check today's timings",
+      desc2: 'Open 7 days, morning & evening',
     },
     metaTitle: 'Child Fevers, Coughs & Rashes in RT Nagar, Bangalore',
     metaDescription:
@@ -225,7 +227,7 @@ const adPages = [
     body: [
       'Not a glance and a prescription. Medicines are prescribed when your child needs them and skipped when they do not, with the reasoning either way.',
       'You leave knowing the diagnosis, the warning signs to watch for, and when it is fine to let a child rest it off.',
-      "Call the clinic to check today's timings before you come.",
+      'The clinic runs morning and evening sittings every day, so a child who is unwell on a Sunday does not have to wait until Monday. Call ahead if you want to be sure the doctor is in.',
     ],
     listTitle: 'What this covers',
     helps: [
