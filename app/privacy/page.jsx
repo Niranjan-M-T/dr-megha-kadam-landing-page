@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ArrowLeft, Phone } from 'lucide-react'
 import { SITE_URL, DOCTOR, CLINIC } from '@/data/site'
-import { TRACKING_CONFIG, adsConfigured } from '@/data/trackingConfig'
+import { TRACKING_CONFIG, adsTagConfigured, adsConfigured } from '@/data/trackingConfig'
 
 // Bumped by hand whenever the wording changes, so the page never claims to be
 // fresher than it is.
@@ -19,7 +19,11 @@ export default function PrivacyPage() {
   // of step with what the site actually loads.
   const usesGtm = Boolean(TRACKING_CONFIG.gtmId)
   const usesGa = Boolean(TRACKING_CONFIG.gaId)
-  const usesAds = adsConfigured()
+  // The tag being present is what matters here, not whether a conversion
+  // action is wired up: the Google Ads tag sets cookies either way, so the
+  // disclosure is owed from the moment it loads.
+  const usesAds = adsTagConfigured()
+  const countsConversions = adsConfigured()
   const usesMeta = Boolean(TRACKING_CONFIG.metaPixelId)
 
   return (
@@ -106,9 +110,10 @@ export default function PrivacyPage() {
           )}
           {usesAds && (
             <li>
-              <strong>Google Ads conversion tracking</strong> records that a call or WhatsApp button
-              was tapped after an advertisement was clicked, so we can tell which advertisements
-              work.
+              <strong>Google Ads</strong>{' '}
+              {countsConversions
+                ? 'records that a call or WhatsApp button was tapped after an advertisement was clicked, so we can tell which advertisements work.'
+                : 'is loaded so that visits arriving from an advertisement can be measured, and sets cookies for that purpose.'}
             </li>
           )}
           {usesMeta && (

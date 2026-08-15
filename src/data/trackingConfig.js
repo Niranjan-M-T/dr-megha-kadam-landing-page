@@ -9,12 +9,18 @@ export const TRACKING_CONFIG = {
   gaId: process.env.NEXT_PUBLIC_GA_ID || '',
   metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID || '',
 
-  // Google Ads. Set BOTH to fire conversions straight from the page via gtag.
-  // Leave them empty if the Ads conversion is configured inside GTM instead,
-  // otherwise the same click is counted twice.
+  // Google Ads.
+  //
+  // The id alone installs the Google tag: enough for Ads to verify the tag,
+  // for auto-tagging and for remarketing audiences. It does NOT record a
+  // conversion, because a conversion action is identified by id + label.
+  //
+  // Add the label to start counting calls and WhatsApp taps as conversions —
+  // but only if the conversion is NOT already built inside GTM, or the same
+  // click is counted twice.
   //   id    -> "AW-1234567890"
   //   label -> the conversion label from the Ads conversion action
-  googleAdsConversionId: process.env.NEXT_PUBLIC_GADS_CONVERSION_ID || '',
+  googleAdsConversionId: process.env.NEXT_PUBLIC_GADS_CONVERSION_ID || 'AW-18340384473',
   googleAdsConversionLabel: process.env.NEXT_PUBLIC_GADS_CONVERSION_LABEL || '',
 
   phone: {
@@ -51,8 +57,16 @@ export const PRIMARY_CONVERSIONS = [
   CONVERSION_EVENTS.APPOINTMENT_SUBMIT,
 ]
 
+// The Google tag is installed. True on the id alone — this is what decides
+// whether gtag.js loads and whether the privacy policy has to disclose Google
+// advertising, since the tag sets cookies whether or not a conversion is
+// ever counted.
+export const adsTagConfigured = () => Boolean(TRACKING_CONFIG.googleAdsConversionId)
+
+// A conversion ACTION is fireable. Needs the label too: `send_to` without one
+// has no conversion action to attribute the click to.
 export const adsConfigured = () =>
   Boolean(TRACKING_CONFIG.googleAdsConversionId && TRACKING_CONFIG.googleAdsConversionLabel)
 
-// gtag is needed for GA4 and/or direct Ads conversions.
-export const needsGtag = () => Boolean(TRACKING_CONFIG.gaId) || adsConfigured()
+// gtag is needed for GA4 and/or the Google Ads tag.
+export const needsGtag = () => Boolean(TRACKING_CONFIG.gaId) || adsTagConfigured()

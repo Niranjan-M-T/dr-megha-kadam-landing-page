@@ -19,6 +19,7 @@ import {
 import { DOCTOR, CLINIC } from '@/data/site'
 import { TRACKING_CONFIG, CONVERSION_EVENTS } from '@/data/trackingConfig'
 import services from '@/data/services'
+import adPages from '@/data/adPages'
 import ServiceIcon from './ServiceIcon'
 import Carousel from './Carousel'
 
@@ -374,6 +375,11 @@ export default function Landing() {
             <motion.h2 variants={fadeUp}>
               Newborns, children and <em>adolescents</em>
             </motion.h2>
+            <motion.p className="lede svc-lede" variants={fadeUp}>
+              A child specialist for the whole stretch, from the first week of life to the awkward
+              teenage years: everyday illness, immunisation, growth checks and the questions in
+              between.
+            </motion.p>
 
             <div className="svc-grid">
               {services.map((s) => (
@@ -431,6 +437,12 @@ export default function Landing() {
               >
                 <MessageCircle size={18} strokeWidth={2.2} /> Ask about your baby
               </motion.a>
+              <motion.p className="more-link" variants={fadeUp}>
+                <Link href="/newborn-care/">
+                  More on newborn and NICU care
+                  <ArrowUpRight size={15} strokeWidth={2.4} />
+                </Link>
+              </motion.p>
             </div>
           </Reveal>
         </section>
@@ -477,6 +489,13 @@ export default function Landing() {
                   </motion.li>
                 ))}
               </motion.ul>
+
+              <motion.p className="more-link" variants={fadeUp}>
+                <Link href="/about/">
+                  Full profile and qualifications
+                  <ArrowUpRight size={15} strokeWidth={2.4} />
+                </Link>
+              </motion.p>
             </div>
           </Reveal>
         </section>
@@ -552,6 +571,13 @@ export default function Landing() {
                 referrerPolicy="no-referrer-when-downgrade"
               />
             </motion.div>
+
+            <motion.p className="more-link" variants={fadeUp}>
+              <Link href="/visit/">
+                Clinic location, timings and what to bring
+                <ArrowUpRight size={15} strokeWidth={2.4} />
+              </Link>
+            </motion.p>
           </Reveal>
         </section>
       </main>
@@ -565,6 +591,15 @@ export default function Landing() {
             {CLINIC.name}, {CLINIC.streetAddress}, {CLINIC.locality} {CLINIC.postalCode}
           </address>
           <a className="foot-tel" href={telUrl}>{CLINIC.phoneDisplay}</a>
+
+          {/* Every sub-page hangs off here. Without it they would be reachable
+              only from the sitemap, which is a weak signal on its own. */}
+          <nav className="foot-nav" aria-label="More pages">
+            {adPages.map((p) => (
+              <Link key={p.slug} href={`/${p.slug}/`}>{p.navLabel}</Link>
+            ))}
+          </nav>
+
           <p className="foot-legal">
             © {new Date().getFullYear()} {DOCTOR.name}. This site is general information, not medical
             advice. If your child needs urgent help, go to the nearest hospital.

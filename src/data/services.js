@@ -35,7 +35,7 @@ const services = [
     tint: 'tint-sage',
     name: 'Vaccinations',
     short:
-      'IAP schedules, catch-up doses, and a technique that hurts less.',
+      'IAP immunisation schedules, catch-up doses, and a technique that hurts less.',
     metaTitle: 'Child Vaccination & Immunization in RT Nagar, Bangalore',
     metaDescription:
       'Child vaccination and immunization in RT Nagar, Bangalore. Dr. Megha D Kadam follows IAP schedules, offers catch-up plans for missed doses and pain-minimised technique.',

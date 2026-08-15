@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Script from 'next/script'
-import { TRACKING_CONFIG, adsConfigured, needsGtag } from '@/data/trackingConfig'
+import { TRACKING_CONFIG, adsTagConfigured, needsGtag } from '@/data/trackingConfig'
 import { initAutoButtonTracking } from '@/lib/tracking'
 
 export default function ConversionAnalytics() {
@@ -50,9 +50,10 @@ export default function ConversionAnalytics() {
         />
       )}
 
-      {/* gtag.js — loaded for GA4 and/or direct Google Ads conversions.
-          Previously this only loaded when gaId was set, which meant the Ads
-          conversion id could never fire because window.gtag never existed. */}
+      {/* gtag.js — loaded for GA4 and/or the Google Ads tag. The gate is the
+          Ads id on its own: requiring a conversion label here would leave the
+          tag uninstalled until a conversion action exists, which is backwards.
+          Ads needs to see the tag before it will verify it. */}
       {loadGtag && (
         <>
           <Script
@@ -68,7 +69,7 @@ export default function ConversionAnalytics() {
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
                 ${gaId ? `gtag('config', '${gaId}');` : ''}
-                ${adsConfigured() ? `gtag('config', '${adsId}');` : ''}
+                ${adsTagConfigured() ? `gtag('config', '${adsId}');` : ''}
               `,
             }}
           />
