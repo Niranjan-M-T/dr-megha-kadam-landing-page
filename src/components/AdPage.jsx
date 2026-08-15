@@ -9,7 +9,7 @@ import {
   Phone,
   TriangleAlert,
 } from 'lucide-react'
-import { SITE_URL, DOCTOR, CLINIC } from '@/data/site'
+import { SITE_URL, DOCTOR, CLINIC, CLINIC_HOURS, formatSlots } from '@/data/site'
 import { TRACKING_CONFIG, CONVERSION_EVENTS } from '@/data/trackingConfig'
 import { relatedPages } from '@/data/adPages'
 
@@ -145,7 +145,7 @@ export default function AdPage({ page }) {
                 </li>
                 <li>
                   <Clock size={15} strokeWidth={2.1} />
-                  By appointment
+                  Open 7 days
                 </li>
               </ul>
             </div>
@@ -207,9 +207,16 @@ export default function AdPage({ page }) {
                     {CLINIC.phoneDisplay}
                   </a>
                 </li>
-                <li>
+                <li className="is-block">
                   <span className="mi"><Clock size={17} strokeWidth={1.9} /></span>
-                  <span>{CLINIC.timings}</span>
+                  <ul className="hours">
+                    {CLINIC_HOURS.map((h) => (
+                      <li key={h.label}>
+                        <span>{h.label}</span>
+                        <b>{formatSlots(h.slots)}</b>
+                      </li>
+                    ))}
+                  </ul>
                 </li>
               </ul>
 

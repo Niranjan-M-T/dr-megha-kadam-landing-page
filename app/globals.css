@@ -638,7 +638,28 @@ p { text-wrap: pretty; }
 
 .loc-meta { display: grid; gap: 10px; }
 .loc-meta li { display: flex; gap: 12px; align-items: center; font-size: 0.92rem; line-height: 1.55; }
-.loc-meta li:first-child { align-items: flex-start; }
+/* rows whose content is a block, not a single line of text */
+.loc-meta li:first-child,
+.loc-meta li.is-block { align-items: flex-start; }
+
+/* Two sittings a day, so the hours are a small table rather than one line.
+   The day label and the times stack on narrow phones and sit side by side
+   as soon as there is room. */
+.hours { display: grid; gap: 7px; }
+.hours li { display: block; line-height: 1.5; }
+.hours span {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--ink-faint);
+}
+.hours b { font-weight: 800; color: var(--ink); }
+
+@media (min-width: 400px) {
+  .hours li { display: flex; gap: 10px; align-items: baseline; }
+  .hours span { flex: none; width: 10.5em; }
+}
 .loc-meta address span { display: block; }
 /* padded so the tel: link clears the 44px touch minimum */
 .loc-meta a {
