@@ -15,24 +15,18 @@ export const TRACKING_CONFIG = {
   // for auto-tagging and for remarketing audiences. It does NOT record a
   // conversion, because a conversion action is identified by id + label.
   //
-  // Add the label to start counting calls and WhatsApp taps as conversions —
-  // but only if the conversion is NOT already built inside GTM, or the same
-  // click is counted twice.
+  // The label is what switches conversion counting on. The same conversion
+  // must NOT also be built inside GTM, or one call is counted twice.
   //   id    -> "AW-1234567890"
   //   label -> the conversion label from the Ads conversion action
   googleAdsConversionId: process.env.NEXT_PUBLIC_GADS_CONVERSION_ID || 'AW-18340384473',
-  googleAdsConversionLabel: process.env.NEXT_PUBLIC_GADS_CONVERSION_LABEL || '',
+  googleAdsConversionLabel:
+    process.env.NEXT_PUBLIC_GADS_CONVERSION_LABEL || 'ksR6CIy-vvEcENmdsKlE',
 
   phone: {
     display: '+91 88677 20711',
     href: '+918867720711',
     cleanNumber: '918867720711',
-  },
-  whatsapp: {
-    number: '918867720711',
-    defaultMessage: encodeURIComponent(
-      'Hello Dr. Megha, I would like to book a consultation for my child.'
-    ),
   },
   practoUrl: 'https://www.practo.com/bangalore/doctor/dr-megha-d-kadam-pediatrician',
   mapsUrl: 'https://share.google/Jses5UYmWJx5zFeGO',
@@ -40,7 +34,6 @@ export const TRACKING_CONFIG = {
 
 export const CONVERSION_EVENTS = {
   PHONE_CLICK: 'phone_call_click',
-  WHATSAPP_CLICK: 'whatsapp_click',
   APPOINTMENT_MODAL_OPEN: 'appointment_modal_open',
   APPOINTMENT_SUBMIT: 'appointment_lead_submitted',
   DIRECTIONS_CLICK: 'get_directions_click',
@@ -53,7 +46,6 @@ export const CONVERSION_EVENTS = {
 // should be built on; everything else is engagement, not a conversion.
 export const PRIMARY_CONVERSIONS = [
   CONVERSION_EVENTS.PHONE_CLICK,
-  CONVERSION_EVENTS.WHATSAPP_CLICK,
   CONVERSION_EVENTS.APPOINTMENT_SUBMIT,
 ]
 

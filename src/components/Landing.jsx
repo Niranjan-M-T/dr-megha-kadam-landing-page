@@ -5,7 +5,6 @@ import { motion, useScroll, useTransform, useInView, useSpring } from 'framer-mo
 import { useRef, useEffect, useState } from 'react'
 import {
   Phone,
-  MessageCircle,
   MapPin,
   ShieldCheck,
   Award,
@@ -17,7 +16,7 @@ import {
   ChevronDown,
 } from 'lucide-react'
 import { DOCTOR, CLINIC, CLINIC_HOURS, formatSlots } from '@/data/site'
-import { TRACKING_CONFIG, CONVERSION_EVENTS } from '@/data/trackingConfig'
+import { CONVERSION_EVENTS } from '@/data/trackingConfig'
 import services from '@/data/services'
 import adPages from '@/data/adPages'
 import ServiceIcon from './ServiceIcon'
@@ -69,7 +68,6 @@ const GALLERY = [
   },
 ]
 
-const waUrl = `https://wa.me/${TRACKING_CONFIG.whatsapp.number}?text=${TRACKING_CONFIG.whatsapp.defaultMessage}`
 const telUrl = `tel:${CLINIC.phoneHref}`
 
 /* ---------------- motion primitives ---------------- */
@@ -269,17 +267,6 @@ export default function Landing() {
 
               <div className="hero-cta rise rise-4" id="hero-cta">
                 <a
-                  href={waUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn btn-wa btn-lg"
-                  data-conversion-name={CONVERSION_EVENTS.WHATSAPP_CLICK}
-                  data-conversion-location="hero"
-                >
-                  <MessageCircle size={19} strokeWidth={2.2} />
-                  Message on WhatsApp
-                </a>
-                <a
                   href={telUrl}
                   className="btn btn-call btn-lg"
                   data-conversion-name={CONVERSION_EVENTS.PHONE_CLICK}
@@ -287,6 +274,17 @@ export default function Landing() {
                 >
                   <Phone size={18} strokeWidth={2.2} />
                   {CLINIC.phoneDisplay}
+                </a>
+                <a
+                  href={CLINIC.mapsUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn btn-ghost btn-lg"
+                  data-conversion-name={CONVERSION_EVENTS.DIRECTIONS_CLICK}
+                  data-conversion-location="hero"
+                >
+                  <MapPin size={18} strokeWidth={2.2} />
+                  Directions
                 </a>
               </div>
 
@@ -308,13 +306,6 @@ export default function Landing() {
         <section className="acts">
           <Reveal className="wrap acts-grid" amount={0.3}>
             {[
-              {
-                k: 'wa',
-                href: waUrl, ext: true,
-                icon: <MessageCircle size={21} strokeWidth={2.1} />,
-                t: 'WhatsApp', s: 'Send a message',
-                ev: CONVERSION_EVENTS.WHATSAPP_CLICK,
-              },
               {
                 k: 'call',
                 href: telUrl,
@@ -386,12 +377,10 @@ export default function Landing() {
                 <motion.a
                   key={s.slug}
                   className="svc"
-                  href={waUrl}
-                  target="_blank"
-                  rel="noreferrer"
+                  href={telUrl}
                   variants={fadeUp}
                   whileTap={{ scale: 0.985 }}
-                  data-conversion-name={CONVERSION_EVENTS.WHATSAPP_CLICK}
+                  data-conversion-name={CONVERSION_EVENTS.PHONE_CLICK}
                   data-conversion-location="service_card"
                   data-conversion-label={s.name}
                 >
@@ -427,15 +416,13 @@ export default function Landing() {
                 way you expected, that is worth a proper look rather than a wait and watch.
               </motion.p>
               <motion.a
-                href={waUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="btn btn-wa"
+                href={telUrl}
+                className="btn btn-call"
                 variants={fadeUp}
-                data-conversion-name={CONVERSION_EVENTS.WHATSAPP_CLICK}
+                data-conversion-name={CONVERSION_EVENTS.PHONE_CLICK}
                 data-conversion-location="neonatology_band"
               >
-                <MessageCircle size={18} strokeWidth={2.2} /> Ask about your baby
+                <Phone size={18} strokeWidth={2.2} /> Call about your baby
               </motion.a>
               <motion.p className="more-link" variants={fadeUp}>
                 <Link href="/newborn-care/">
@@ -538,12 +525,12 @@ export default function Landing() {
 
               <div className="loc-btns">
                 <a
-                  href={waUrl} target="_blank" rel="noreferrer"
-                  className="btn btn-wa btn-lg"
-                  data-conversion-name={CONVERSION_EVENTS.WHATSAPP_CLICK}
+                  href={telUrl}
+                  className="btn btn-call btn-lg"
+                  data-conversion-name={CONVERSION_EVENTS.PHONE_CLICK}
                   data-conversion-location="location_card"
                 >
-                  <MessageCircle size={18} strokeWidth={2.2} /> WhatsApp
+                  <Phone size={18} strokeWidth={2.2} /> {CLINIC.phoneDisplay}
                 </a>
                 <a
                   href={CLINIC.mapsUrl} target="_blank" rel="noreferrer"
@@ -634,18 +621,7 @@ export default function Landing() {
           data-conversion-name={CONVERSION_EVENTS.PHONE_CLICK}
           data-conversion-location="sticky_bar"
         >
-          <Phone size={18} strokeWidth={2.3} /> Call
-        </a>
-        <a
-          href={waUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="bar-btn bar-wa"
-          tabIndex={barVisible ? 0 : -1}
-          data-conversion-name={CONVERSION_EVENTS.WHATSAPP_CLICK}
-          data-conversion-location="sticky_bar"
-        >
-          <MessageCircle size={18} strokeWidth={2.3} /> WhatsApp
+          <Phone size={18} strokeWidth={2.3} /> Call {CLINIC.phoneDisplay}
         </a>
         <a
           href={CLINIC.mapsUrl}

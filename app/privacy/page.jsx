@@ -66,14 +66,11 @@ export default function PrivacyPage() {
         <h2>Information you give us</h2>
         <p>
           Nothing. There is no contact form, no sign-up and no payment on this site. Every button
-          either opens your phone dialler, opens WhatsApp, or opens Google Maps. We do not receive
-          anything you type.
+          either opens your phone dialler or opens Google Maps. We do not receive anything you type.
         </p>
         <p>
-          When you call or message, that conversation happens on your phone network or on WhatsApp,
-          not on this website. WhatsApp messages are covered by WhatsApp&apos;s own privacy policy.
-          Please do not send medical details, photographs or reports over WhatsApp unless the clinic
-          has asked you to.
+          When you call, that conversation happens on your phone network, not on this website. This
+          site has no record of it.
         </p>
 
         <h2>Information collected automatically</h2>
@@ -112,7 +109,7 @@ export default function PrivacyPage() {
             <li>
               <strong>Google Ads</strong>{' '}
               {countsConversions
-                ? 'records that a call or WhatsApp button was tapped after an advertisement was clicked, so we can tell which advertisements work.'
+                ? 'records that a call button was tapped after an advertisement was clicked, so we can tell which advertisements work.'
                 : 'is loaded so that visits arriving from an advertisement can be measured, and sets cookies for that purpose.'}
             </li>
           )}

@@ -5,12 +5,11 @@ import {
   Check,
   Clock,
   MapPin,
-  MessageCircle,
   Phone,
   TriangleAlert,
 } from 'lucide-react'
 import { SITE_URL, DOCTOR, CLINIC, CLINIC_HOURS, formatSlots } from '@/data/site'
-import { TRACKING_CONFIG, CONVERSION_EVENTS } from '@/data/trackingConfig'
+import { CONVERSION_EVENTS } from '@/data/trackingConfig'
 import { relatedPages } from '@/data/adPages'
 
 /**
@@ -26,11 +25,6 @@ import { relatedPages } from '@/data/adPages'
  */
 
 const telUrl = `tel:${CLINIC.phoneHref}`
-
-function waUrl(message) {
-  const text = message ? encodeURIComponent(message) : TRACKING_CONFIG.whatsapp.defaultMessage
-  return `https://wa.me/${TRACKING_CONFIG.whatsapp.number}?text=${text}`
-}
 
 /** Plain responsive <img>. No next/image: the export is unoptimized anyway. */
 function Shot({ stem, widths, w, h, alt, sizes }) {
@@ -49,7 +43,6 @@ function Shot({ stem, widths, w, h, alt, sizes }) {
 }
 
 export default function AdPage({ page }) {
-  const wa = waUrl(page.waMessage)
   const related = relatedPages(page.slug)
   const loc = `ad_${page.slug.replace(/-/g, '_')}`
 
@@ -115,18 +108,6 @@ export default function AdPage({ page }) {
 
               <div className="ad-cta">
                 <a
-                  className="btn btn-wa btn-lg"
-                  href={wa}
-                  target="_blank"
-                  rel="noreferrer"
-                  data-conversion-name={CONVERSION_EVENTS.WHATSAPP_CLICK}
-                  data-conversion-location={`${loc}_hero`}
-                  data-conversion-label={page.navLabel}
-                >
-                  <MessageCircle size={19} strokeWidth={2.2} />
-                  {page.ctaLabel}
-                </a>
-                <a
                   className="btn btn-call btn-lg"
                   href={telUrl}
                   data-conversion-name={CONVERSION_EVENTS.PHONE_CLICK}
@@ -134,6 +115,15 @@ export default function AdPage({ page }) {
                   data-conversion-label={page.navLabel}
                 >
                   <Phone size={18} strokeWidth={2.2} />
+                  {page.ctaLabel}
+                </a>
+                <a
+                  className="btn btn-ghost btn-lg"
+                  href={telUrl}
+                  data-conversion-name={CONVERSION_EVENTS.PHONE_CLICK}
+                  data-conversion-location={`${loc}_hero_number`}
+                  data-conversion-label={page.navLabel}
+                >
                   {CLINIC.phoneDisplay}
                 </a>
               </div>
@@ -222,14 +212,12 @@ export default function AdPage({ page }) {
 
               <div className="loc-btns">
                 <a
-                  className="btn btn-wa btn-lg"
-                  href={wa}
-                  target="_blank"
-                  rel="noreferrer"
-                  data-conversion-name={CONVERSION_EVENTS.WHATSAPP_CLICK}
+                  className="btn btn-call btn-lg"
+                  href={telUrl}
+                  data-conversion-name={CONVERSION_EVENTS.PHONE_CLICK}
                   data-conversion-location={`${loc}_clinic_card`}
                 >
-                  <MessageCircle size={18} strokeWidth={2.2} /> WhatsApp
+                  <Phone size={18} strokeWidth={2.2} /> {CLINIC.phoneDisplay}
                 </a>
                 <a
                   className="btn btn-ghost btn-lg"
@@ -328,17 +316,7 @@ export default function AdPage({ page }) {
           data-conversion-name={CONVERSION_EVENTS.PHONE_CLICK}
           data-conversion-location={`${loc}_sticky_bar`}
         >
-          <Phone size={18} strokeWidth={2.3} /> Call
-        </a>
-        <a
-          className="bar-btn bar-wa"
-          href={wa}
-          target="_blank"
-          rel="noreferrer"
-          data-conversion-name={CONVERSION_EVENTS.WHATSAPP_CLICK}
-          data-conversion-location={`${loc}_sticky_bar`}
-        >
-          <MessageCircle size={18} strokeWidth={2.3} /> WhatsApp
+          <Phone size={18} strokeWidth={2.3} /> Call {CLINIC.phoneDisplay}
         </a>
         <a
           className="bar-btn bar-map"
