@@ -76,9 +76,13 @@ export function trackConversion(eventName, customParams = {}) {
     // configured; if the conversion is built inside GTM instead, leave them
     // unset so the click is not counted twice.
     if (adsConfigured() && PRIMARY_CONVERSIONS.includes(eventName)) {
+      // value/currency mirror the snippet Google generates for this conversion
+      // action. Sending 0 here would override the per-conversion value set in
+      // the Ads UI and log every call as worth nothing, which quietly breaks
+      // any value-based bidding strategy later.
       window.gtag('event', 'conversion', {
         send_to: `${TRACKING_CONFIG.googleAdsConversionId}/${TRACKING_CONFIG.googleAdsConversionLabel}`,
-        value: 0,
+        value: 1.0,
         currency: 'INR',
         transaction_id: `${eventName}-${Date.now()}`,
       })
@@ -87,7 +91,7 @@ export function trackConversion(eventName, customParams = {}) {
 
   // 3. Meta Pixel (fbq)
   if (typeof window.fbq === 'function') {
-    if (eventName === CONVERSION_EVENTS.PHONE_CLICK || eventName === CONVERSION_EVENTS.WHATSAPP_CLICK) {
+    if (eventName === CONVERSION_EVENTS.PHONE_CLICK) {
       window.fbq('track', 'Contact', payload)
     } else if (eventName === CONVERSION_EVENTS.APPOINTMENT_SUBMIT) {
       window.fbq('track', 'Lead', payload)
@@ -143,8 +147,6 @@ export function initAutoButtonTracking() {
     if (!customEventName) {
       if (href.startsWith('tel:')) {
         determinedEvent = CONVERSION_EVENTS.PHONE_CLICK
-      } else if (href.includes('wa.me') || href.includes('whatsapp.com')) {
-        determinedEvent = CONVERSION_EVENTS.WHATSAPP_CLICK
       } else if (href.includes('google.com/maps') || href.includes('maps.app') || href.includes('share.google')) {
         determinedEvent = CONVERSION_EVENTS.DIRECTIONS_CLICK
       } else if (href.includes('practo.com')) {

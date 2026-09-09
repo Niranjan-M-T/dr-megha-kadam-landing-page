@@ -9,7 +9,8 @@
  *
  * These are server-rendered and carry no client component of their own, so
  * apart from the shared analytics listener they ship no JavaScript. Paid
- * traffic lands here first and mostly on a phone.
+ * traffic lands here first and mostly on a phone, and every call to action
+ * on them is the telephone.
  */
 
 import { CLINIC } from './site'
@@ -43,8 +44,7 @@ const adPages = [
       'Jaundice, feeding and weight gain',
       'NICU-graduate follow-up',
     ],
-    ctaLabel: 'Ask about your baby',
-    waMessage: "Hi Dr. Megha, I'd like to ask about newborn care for my baby.",
+    ctaLabel: 'Call about your baby',
     photo: {
       stem: 'megha-nicu',
       widths: [480, 720],
@@ -83,8 +83,7 @@ const adPages = [
       'Pain-minimised injection technique',
       'Annual flu shots',
     ],
-    ctaLabel: 'Book a vaccination',
-    waMessage: "Hi Dr. Megha, I'd like to book a vaccination for my child.",
+    ctaLabel: 'Call to book a vaccine',
     photo: {
       stem: 'megha-newborn',
       widths: [640, 1080],
@@ -123,8 +122,7 @@ const adPages = [
       'Sleep and behaviour guidance',
       'Well-baby visit schedules',
     ],
-    ctaLabel: 'Book a growth check',
-    waMessage: "Hi Dr. Megha, I'd like to book a growth and development check.",
+    ctaLabel: 'Call to book a check-up',
     photo: {
       stem: 'megha-echo',
       widths: [640, 1080],
@@ -163,8 +161,7 @@ const adPages = [
       'Neonatologist at Apollo Bannerghatta Road, Aster CMI Hebbal and SPARSH Hennur',
       'Teaches neonatal resuscitation to clinical staff',
     ],
-    ctaLabel: 'Book a consultation',
-    waMessage: "Hi Dr. Megha, I'd like to book a consultation.",
+    ctaLabel: 'Call for an appointment',
     photo: {
       stem: 'megha-speaking',
       widths: [480, 720],
@@ -191,7 +188,7 @@ const adPages = [
       "Dr. Megha's Baby & Child Care is on the first floor of the Lenskart building on CBI Main Road, HMT Layout, RT Nagar.",
     body: [
       'The clinic is open seven days a week. Monday to Saturday it runs two sittings, 9 am to 12 pm and 5 to 8 pm. Sunday is one sitting, 10:30 am to 1 pm.',
-      'A quick call or WhatsApp before you leave home is still worth it. It confirms the doctor is in and saves you sitting in a waiting room with an unwell child for longer than you need to.',
+      'A quick call before you leave home is still worth it. It confirms the doctor is in and saves you sitting in a waiting room with an unwell child for longer than you need to.',
       'It is a short drive from Ganganagar, Sultanpalya, Kaval Byrasandra, Dinnur and Hebbal.',
       'For a first visit, bring any previous prescriptions along with the immunisation card and growth chart if you have them.',
     ],
@@ -204,8 +201,7 @@ const adPages = [
       'Bring previous prescriptions and the immunisation card',
       'The directions button opens straight into Google Maps',
     ],
-    ctaLabel: 'Message the clinic',
-    waMessage: "Hi Dr. Megha, I'd like to book a slot at the clinic.",
+    ctaLabel: 'Call the clinic',
     showMap: true,
   },
 
@@ -243,7 +239,6 @@ const adPages = [
     urgentNote:
       'If your child is struggling to breathe, unresponsive, having a fit or badly dehydrated, go straight to the nearest hospital rather than waiting for an appointment.',
     ctaLabel: 'Call the clinic',
-    waMessage: "Hi Dr. Megha, my child is unwell and I'd like an appointment.",
     photo: {
       stem: 'megha-clinic',
       widths: [480, 680],
@@ -282,8 +277,7 @@ const adPages = [
       'Iron and vitamin D reviews',
       'Everyday plates for Indian homes',
     ],
-    ctaLabel: 'Ask about feeding',
-    waMessage: "Hi Dr. Megha, I'd like advice on my child's feeding and nutrition.",
+    ctaLabel: 'Call about feeding',
   },
 ]
 
